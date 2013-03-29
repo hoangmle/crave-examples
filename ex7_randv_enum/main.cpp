@@ -13,14 +13,14 @@ enum car_type_enum {
 	MERCEDES = 3,
 	VW = -1		
 };
-CRAVE_ENUM(car_type_enum, 4, AUDI, BMW, MERCEDES, VW);
+CRAVE_ENUM(car_type_enum, (AUDI)(BMW)(MERCEDES)(VW));
 
 enum color_enum {
 	RED,
 	GREEN,
 	BLUE
 };
-CRAVE_ENUM(color_enum, 3, RED, GREEN, BLUE);
+CRAVE_ENUM(color_enum, (RED)(GREEN)(BLUE));
 
 class my_rand_obj : public rand_obj {
 public:
