@@ -2,13 +2,17 @@
 
 using crave::rand_obj;
 using crave::randv;
+using crave::distribution;
+using crave::weighted_range;
 
 class item : public rand_obj {
 public:
 	item(rand_obj* parent = 0) : rand_obj(parent), src_addr(this), dest_addr(this) {
-		src_addr.addRange(0, 9);
-		src_addr.addRange(90, 99);
-
+    src_addr.dist(
+      distribution<uint>::create
+        (weighted_range<uint>(0, 9))
+        (weighted_range<uint>(90, 99))
+    );
 		constraint(dest_addr() % 4 == 0);
 		constraint(dest_addr() <= reference(src_addr) + 3); 
 	} 

@@ -3,9 +3,8 @@
 
 using crave::rand_obj;
 using crave::randv;
-
-#define IF_THEN(a, b) !(a) || (b)
-#define IF_THEN_ELSE(a, b, c) (!(a) || (b)) && ((a) || (c))
+using crave::if_then_else;
+using crave::if_then;
 
 enum car_type_enum {
 	AUDI = 1,
@@ -29,13 +28,13 @@ public:
 	randv<int> price; 
 
 	my_rand_obj(rand_obj* parent = 0) : rand_obj(parent), car(this), color(this), price(this) {
-		constraint(IF_THEN(car() == AUDI, color() != GREEN));
-		constraint(IF_THEN(car() == BMW, color() != RED));
-		constraint(IF_THEN(car() == MERCEDES, color() != BLUE));
+		constraint(if_then(car() == AUDI, color() != GREEN));
+		constraint(if_then(car() == BMW, color() != RED));
+		constraint(if_then(car() == MERCEDES, color() != BLUE));
 		constraint(20 < price() && price() < 100);
 		constraint(price() % 5 == 0);
-		constraint(IF_THEN(car() == VW, price() <= 40));
-		constraint(IF_THEN(color() == RED, price() >= 40));
+		constraint(if_then(car() == VW, price() <= 40));
+		constraint(if_then(color() == RED, price() >= 40));
 	} 
 
 	friend ostream& operator<<(ostream& os, my_rand_obj& obj) { 

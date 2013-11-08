@@ -2,16 +2,23 @@
 
 using crave::rand_obj;
 using crave::randv;
+using crave::distribution;
+using crave::weighted_range;
 
 class item : public rand_obj {
 public:
 	item(rand_obj* parent = 0) : rand_obj(parent), src_addr(this), dest_addr(this) {
-		src_addr.addRange(0, 9);
-		src_addr.addRange(90, 99);
-
-		dest_addr.addWeightedRange(0, 9, 60); // 60%
-		dest_addr.addWeightedRange(10, 19, 30); // 30%
-		dest_addr.addWeightedRange(100, 109, 10); // 10%
+    src_addr.dist(
+      distribution<uint>::create
+        (weighted_range<uint>(0, 9))
+        (weighted_range<uint>(90, 99))
+    );
+    dest_addr.dist(
+      distribution<uint>::create
+        (weighted_range<uint>(0, 9, 60))
+        (weighted_range<uint>(10, 19, 30))
+        (weighted_range<uint>(100, 109, 10))
+    );
 	} 
      
 	friend ostream& operator<<(ostream& os, item& it) { 
@@ -34,10 +41,9 @@ int main (int argc , char *argv[]) {
 		std::cout << it << std::endl;
 	}
  
-	it.dest_addr.resetDistribution();
-	it.dest_addr.addRange(10000, 99999);
+	it.dest_addr.range(10000, 99999);
 
-    std::cout << "****************************" << std::endl;
+  std::cout << "****************************" << std::endl;
 
 	for (int i = 0; i < 20; i++) {
 		it.next();
