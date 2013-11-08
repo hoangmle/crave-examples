@@ -24,6 +24,7 @@ public:
 };
 
 int main (int argc , char *argv[]) {
+    crave::init("crave.cfg");
 	item it;
 	assert( !it.next() ); // unsatisfiable constraints (data < 0) and (data > 0)
 	

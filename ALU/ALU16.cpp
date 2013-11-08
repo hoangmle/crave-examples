@@ -33,6 +33,7 @@ struct ALU16 : public rand_obj {
 
 int sc_main (int argc, char** argv)
 {
+  crave::init("crave.cfg");
   boost::timer timer;
   ALU16 c;
   c.next();

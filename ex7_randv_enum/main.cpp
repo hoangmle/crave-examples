@@ -60,6 +60,7 @@ public:
 };
 
 int main (int argc , char *argv[]) {
+    crave::init("crave.cfg");
 	my_rand_obj obj;
 	for (int i = 0; i < 20; i++) {
 		std::cout << obj.next() << " " << obj << std::endl;

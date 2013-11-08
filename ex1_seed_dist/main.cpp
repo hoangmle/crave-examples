@@ -24,6 +24,7 @@ public:
 };
 
 int main (int argc , char *argv[]) {
+	crave::init("crave.cfg");
 	crave::set_global_seed(1234567890); // set the global seed for consistent results
 
 	item it;

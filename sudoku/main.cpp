@@ -108,6 +108,7 @@ int given_sudoku[9][9] = {
 };
 
 int main (int argc , char *argv[]) {
+    crave::init("crave.cfg");
 	sudoku s;
 	s.solve( given_sudoku );
 	return 0;

@@ -4,6 +4,7 @@ using crave::randv;
 using crave::DefaultGenerator;
 
 int main (int argc , char *argv[]) {
+    crave::init("crave.cfg");
 	randv<int> x(NULL);
 	randv<int> y(NULL);
 	DefaultGenerator gen;

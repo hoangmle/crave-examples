@@ -42,6 +42,7 @@ randv< sc_bv<2> >  op ;
 
 int sc_main (int argc, char** argv)
 {
+  crave::init("./crave.cfg");
   boost::timer timer;
   ALU4 c;
   std::cout << "first: " << timer.elapsed() << "\n";
