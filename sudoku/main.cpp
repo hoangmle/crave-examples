@@ -3,7 +3,6 @@
 using crave::rand_obj;
 using crave::randv;
 using crave::rand_vec;
-using crave::_i;
 using crave::reference;
 
 #define IF_THEN(a, b) !(a) || (b)

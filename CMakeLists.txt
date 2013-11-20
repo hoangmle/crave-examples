@@ -3,6 +3,12 @@ include_directories( ${crave_SOURCE_DIR}/src ${metaSMT_INCLUDE_DIR} ${Boost_INCL
 
 find_library(PTHREAD pthread)
 
+add_executable(sudoku sudoku/main.cpp)
+target_link_libraries(sudoku crave ${PTHREAD} ${GLOG_LIBRARY} )
+
+add_executable(crave_functionality crave_functionality/main.cpp)
+target_link_libraries(crave_functionality crave ${PTHREAD} ${GLOG_LIBRARY} )
+
 add_executable(ex1_seed_dist ex1_seed_dist/main.cpp)
 target_link_libraries(ex1_seed_dist crave ${PTHREAD} ${GLOG_LIBRARY} )
 
