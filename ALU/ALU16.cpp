@@ -12,8 +12,8 @@ struct ALU16 : public rand_obj {
   randv< sc_bv<2> >  op ;
   randv< sc_uint<16> > a, b ;
 
-  ALU16()
-  : op(this), a(this), b(this)
+  ALU16(rand_obj* parent = 0)
+  : rand_obj(parent), op(this), a(this), b(this)
   {
     constraint ( (op() != 0x0) || ( 65535 >= a() + b() ) );
     constraint ( (op() != 0x1) || ((65535 >= a() - b()) && (b() <= a()) ) );

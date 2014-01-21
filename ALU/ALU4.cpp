@@ -21,8 +21,8 @@ struct ALU4 : public rand_obj {
 randv< sc_bv<2> >  op ;
   randv< sc_uint<4> > a, b ;
 
-  ALU4()
-  : op(this), a(this), b(this)
+  ALU4(rand_obj* parent = 0)
+  : rand_obj(parent), op(this), a(this), b(this)
   {
     constraint ( (op() != (unsigned char)0x0) || ( (unsigned char)15 >= a() + b() ) );
     constraint ( (op() != (unsigned char)0x1) || (((unsigned char)15 >= a() - b()) && (b() <= a()) ) );

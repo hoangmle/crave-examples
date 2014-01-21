@@ -5,9 +5,6 @@ using crave::randv;
 using crave::rand_vec;
 using crave::reference;
 
-#define IF_THEN(a, b) !(a) || (b)
-#define IF_THEN_ELSE(a, b, c) (!(a) || (b)) && ((a) || (c))
-
 template<typename T> 
 struct my_randv : randv<T> {
 	my_randv() : randv<T>(0) { }
@@ -22,7 +19,7 @@ public:
         // constraint keep_given_sudoku, needed to copy given values to solved sudoku
 		for (int i = 0; i < 9; i++)
 			for (int j = 0; j < 9; j++)
-				constraint( IF_THEN( reference(given_sudoku[i][j]) != 0, result_sudoku[i][j]() == reference(given_sudoku[i][j]) ) );
+				constraint( crave::if_then( reference(given_sudoku[i][j]) != 0, result_sudoku[i][j]() == reference(given_sudoku[i][j]) ) );
 
         // constraint possible_values, only number from 1 to 9 are allowed
 		for (int i = 0; i < 9; i++)
@@ -56,7 +53,7 @@ public:
  	                ( result_sudoku[i][j]() != result_sudoku[(i + 1) % 3 + i - (i % 3)][(j + 2) % 3 + j - (j % 3)]() )
 	                ( result_sudoku[i][j]() != result_sudoku[(i + 2) % 3 + i - (i % 3)][(j + 2) % 3 + j - (j % 3)]() );
 
-	} 
+	}
  
     void solve(int given[9][9]) {
 		int count = 0;

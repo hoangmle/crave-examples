@@ -12,8 +12,8 @@ struct ALU32 : public rand_obj {
   randv< sc_bv<2> >  op ;
   randv< sc_uint<32> > a, b ;
 
-  ALU32()
-  : op(this), a(this), b(this)
+  ALU32(rand_obj* parent = 0)
+  : rand_obj(parent), op(this), a(this), b(this)
   {
     constraint ( (op() != 0x0) || ( 4294967295u >= a() + b() ) );
     constraint ( (op() != 0x1) || ((4294967295u >= a() - b()) && (b() <= a()) ) );

@@ -12,8 +12,8 @@ struct ALU24 : public rand_obj {
   randv< sc_bv<2> >  op ;
   randv< sc_uint<24> > a, b ;
 
-  ALU24()
-  : op(this), a(this), b(this)
+  ALU24(rand_obj* parent = 0)
+  : rand_obj(parent), op(this), a(this), b(this)
   {
     constraint ( (op() != 0x0) || ( 16777215 >= a() + b() ) );
     constraint ( (op() != 0x1) || ((16777215 >= a() - b()) && (b() <= a()) ) );
