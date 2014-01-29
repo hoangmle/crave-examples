@@ -31,8 +31,11 @@ public:
 	randv<color_enum> color; 
 	randv<int> power; 
 	randv<int> price; 
+	
+	int x;
+	short y;
 
-	my_rand_obj(rand_obj* parent = 0) : rand_obj(parent), car(this), color(this), price(this) {
+	my_rand_obj(rand_obj* parent = 0) : rand_obj(parent), car(this), color(this), power(this), price(this) {
 		constraint(if_then(car() == AUDI, color() != GREEN));
 		constraint(if_then(car() == BMW, color() != RED));
 		constraint(if_then(car() == MERCEDES, color() != BLUE));
@@ -41,7 +44,7 @@ public:
     int prices[] = { 20, 30, 40, 50, 60, 70, 80, 90, 100 };
 		constraint(inside(price(), prices));
 		constraint(if_then(car() == MERCEDES, price() >= 40));
-		constraint(if_then(color() == RED, price() <= 40));
+		constraint(if_then(color() == RED, price() <= 40));		
 	} 
 
 	friend ostream& operator<<(ostream& os, my_rand_obj& obj) { 
