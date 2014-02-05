@@ -5,6 +5,7 @@ using crave::rand_obj;
 using crave::randv;
 using crave::rand_vec;
 using crave::placeholder;
+using crave::dist;
 using crave::foreach;
 using crave::unique;
 using crave::if_then;
@@ -15,56 +16,58 @@ using crave::if_then_else;
 
 class item : public rand_obj {
 public:
-	item(rand_obj* parent = 0) : rand_obj(parent), src_addr_vec(this), dest_addr_vec(this), data_vec(this), tmp(this), _i() {
-		tmp.range(5, 10);
+  item(rand_obj* parent = 0) : rand_obj(parent), src_addr_vec(this), dest_addr_vec(this), data_vec(this), tmp(this), _i() {
+    constraint(dist(tmp(),
+      crave::distribution<uint>::simple_range(5,10)
+    ));
 
-		constraint(src_addr_vec().size() == reference(tmp));
-		constraint(foreach(src_addr_vec(), src_addr_vec()[_i] < 0xFF));
-		constraint(foreach(src_addr_vec(), src_addr_vec()[_i] % 4 == 0));
-		constraint(unique(src_addr_vec()));
+    constraint(src_addr_vec().size() == reference(tmp));
+    constraint(foreach(src_addr_vec(), src_addr_vec()[_i] < 0xFF));
+    constraint(foreach(src_addr_vec(), src_addr_vec()[_i] % 4 == 0));
+    constraint(unique(src_addr_vec()));
 
-		constraint(dest_addr_vec().size() == reference(tmp));
-		constraint(foreach(dest_addr_vec(), if_then(_i == 0, dest_addr_vec()[_i] < 0xF)));
-		constraint(foreach(dest_addr_vec(), dest_addr_vec()[_i] == dest_addr_vec()[_i - 1] + 8));
-		constraint(unique(dest_addr_vec()));
+    constraint(dest_addr_vec().size() == reference(tmp));
+    constraint(foreach(dest_addr_vec(), if_then(_i == 0, dest_addr_vec()[_i] < 0xF)));
+    constraint(foreach(dest_addr_vec(), dest_addr_vec()[_i] == dest_addr_vec()[_i - 1] + 8));
+    constraint(unique(dest_addr_vec()));
 
-		constraint(data_vec().size() == 2 * reference(tmp));
-		constraint(foreach(data_vec(), if_then_else(_i % 2 == 0, data_vec()[_i] <= 10, data_vec()[_i] == data_vec()[_i - 1] * data_vec()[_i - 1])));
-	} 
-     
-	friend ostream& operator<<(ostream& os, item& it) { 
-		os << "src_addr_vec = ";
-		for (uint i = 0; i < it.src_addr_vec.size(); i++) 
-			os << it.src_addr_vec[i] << " ";
-		os << std::endl;
-		os << "dest_addr_vec = ";
-		for (uint i = 0; i < it.dest_addr_vec.size(); i++) 
-			os << it.dest_addr_vec[i] << " ";
-		os << std::endl;
-		os << "data_vec = ";
-		for (uint i = 0; i < it.data_vec.size(); i++) 
-			os << it.data_vec[i] << " ";
-		os << std::endl;
-		return os; 
-	}
+    constraint(data_vec().size() == 2 * reference(tmp));
+    constraint(foreach(data_vec(), if_then_else(_i % 2 == 0, data_vec()[_i] <= 10, data_vec()[_i] == data_vec()[_i - 1] * data_vec()[_i - 1])));
+  }
 
-	rand_vec<uint> src_addr_vec;
-	rand_vec<uint> dest_addr_vec;
-	rand_vec<uint> data_vec;
-	randv<uint> tmp;
+  friend ostream& operator<<(ostream& os, item& it) {
+    os << "src_addr_vec = ";
+    for (uint i = 0; i < it.src_addr_vec.size(); i++)
+      os << it.src_addr_vec[i] << " ";
+    os << std::endl;
+    os << "dest_addr_vec = ";
+    for (uint i = 0; i < it.dest_addr_vec.size(); i++)
+      os << it.dest_addr_vec[i] << " ";
+    os << std::endl;
+    os << "data_vec = ";
+    for (uint i = 0; i < it.data_vec.size(); i++)
+      os << it.data_vec[i] << " ";
+    os << std::endl;
+    return os;
+  }
+
+  rand_vec<uint> src_addr_vec;
+  rand_vec<uint> dest_addr_vec;
+  rand_vec<uint> data_vec;
+  randv<uint> tmp;
   placeholder _i;
 };
 
 int main (int argc , char *argv[]) {
     crave::init("crave.cfg");
-	item it;
+  item it;
 
   it.constraint.print_dot_graph(std::cout);
 
-	for (int i = 0; i < 10; i++) {
-		it.next();
-		std::cout << it << std::endl;
-	}
+  for (int i = 0; i < 10; i++) {
+    it.next();
+    std::cout << it << std::endl;
+  }
 
-	return 0;
+  return 0;
 }
