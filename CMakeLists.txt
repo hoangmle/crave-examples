@@ -3,6 +3,9 @@ include_directories( ${crave_SOURCE_DIR}/src ${metaSMT_INCLUDE_DIR} ${Boost_INCL
 
 find_library(PTHREAD pthread)
 
+add_executable(coin_dist coin_dist/main.cpp)
+target_link_libraries(coin_dist crave ${PTHREAD} ${GLOG_LIBRARY} )
+
 add_executable(sudoku sudoku/main.cpp)
 target_link_libraries(sudoku crave ${PTHREAD} ${GLOG_LIBRARY} )
 
