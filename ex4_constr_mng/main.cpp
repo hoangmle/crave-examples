@@ -4,13 +4,17 @@
 using crave::rand_obj;
 using crave::randv;
 using crave::reference;
+using crave::distribution;
+using crave::dist;
 using crave::bitslice;
 
 class item : public rand_obj {
 public:
 	item(rand_obj* parent = 0) : rand_obj(parent), src_addr(this), dest_addr(this), data(this), x(this), y(this), z(this) {
-		src_addr.range(0, 0xFE);
-		constraint(dest_addr() <= reference(src_addr));
+    constraint(dist(src_addr(),
+      distribution<uint>::simple_range(0, 0xFE)
+    ));
+		constraint(dest_addr() <= src_addr());
 		constraint("neg_data", -16 < data() && data() < 0 );
 		constraint("pos_data", 16 > data() && data() > 0);
 		constraint(bitslice(10, 3, x()) == 0xFF);

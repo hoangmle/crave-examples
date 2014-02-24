@@ -9,6 +9,8 @@ using crave::foreach;
 using crave::unique;
 using crave::if_then;
 using crave::if_then_else;
+using crave::dist;
+using crave::distribution;
 
 #define IF_THEN(a, b) !(a) || (b)
 #define IF_THEN_ELSE(a, b, c) (!(a) || (b)) && ((a) || (c))
@@ -16,19 +18,19 @@ using crave::if_then_else;
 class item : public rand_obj {
 public:
 	item(rand_obj* parent = 0) : rand_obj(parent), src_addr_vec(this), dest_addr_vec(this), data_vec(this), tmp(this), _i() {
-		tmp.range(5, 10);
+    constraint(dist(tmp(), distribution<uint>::simple_range(5, 10)));
 
-		constraint(src_addr_vec().size() == reference(tmp));
+		constraint(src_addr_vec().size() == tmp());
 		constraint(foreach(src_addr_vec(), src_addr_vec()[_i] < 0xFF));
 		constraint(foreach(src_addr_vec(), src_addr_vec()[_i] % 4 == 0));
 		constraint(unique(src_addr_vec()));
 
-		constraint(dest_addr_vec().size() == reference(tmp));
+		constraint(dest_addr_vec().size() == tmp());
 		constraint(foreach(dest_addr_vec(), if_then(_i == 0, dest_addr_vec()[_i] < 0xF)));
 		constraint(foreach(dest_addr_vec(), dest_addr_vec()[_i] == dest_addr_vec()[_i - 1] + 8));
 		constraint(unique(dest_addr_vec()));
 
-		constraint(data_vec().size() == 2 * reference(tmp));
+		constraint(data_vec().size() == 2 * tmp());
 		constraint(foreach(data_vec(), if_then_else(_i % 2 == 0, data_vec()[_i] <= 10, data_vec()[_i] == data_vec()[_i - 1] * data_vec()[_i - 1])));
 	} 
      
