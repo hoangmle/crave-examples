@@ -5,14 +5,9 @@ using crave::randv;
 using crave::rand_vec;
 using crave::reference;
 
-template<typename T> 
-struct my_randv : randv<T> {
-	my_randv() : randv<T>(0) { }
-};
-
 class sudoku : public rand_obj {
 public:
-    my_randv<int> result_sudoku[9][9]; // variable to store solved sudoku
+    randv<int> result_sudoku[9][9]; // variable to store solved sudoku
     int           given_sudoku[9][9];  // variable to hold given sudoku
 
 	sudoku(rand_obj* parent = 0) : rand_obj(parent) {
