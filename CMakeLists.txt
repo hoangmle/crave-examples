@@ -4,7 +4,7 @@ include_directories( ${crave_SOURCE_DIR}/src ${metaSMT_INCLUDE_DIR} ${Boost_INCL
 find_library(PTHREAD pthread)
 
 set(EXAMPLES coin_dist crave_functionality ex1_seed_dist ex2_constr_ref
-               ex3_inh_soft_next ex4_constr_mng ex5_vec_constr
+               ex3_inh_soft_next ex4_constr_mng ex5_vec_constr ex6_inline_gen
                ex7_randv_enum sudoku)
 
 foreach (ex ${EXAMPLES})
