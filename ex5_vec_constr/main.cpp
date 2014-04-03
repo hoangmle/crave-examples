@@ -1,5 +1,4 @@
 #include <crave/ConstrainedRandom.hpp>
-#include <crave/Constraint.hpp>
 
 using crave::rand_obj;
 using crave::randv;
