@@ -21,7 +21,7 @@ public:
 		constraint(x() > 123456);
 		constraint((y() ^ 0x7FFF) == 0);
 		constraint((z() >> 4) == 0x000F);
-		constraint.print_dot_graph(std::cout);
+		constraint.printDotGraph(std::cout);
 	} 
      
 	friend ostream& operator<<(ostream& os, item& it) { 

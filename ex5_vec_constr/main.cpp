@@ -60,7 +60,7 @@ int main (int argc , char *argv[]) {
     crave::init("crave.cfg");
 	item it;
 
-  it.constraint.print_dot_graph(std::cout);
+  it.constraint.printDotGraph(std::cout);
 
 	for (int i = 0; i < 10; i++) {
 		it.next();
