@@ -5,7 +5,7 @@ find_library(PTHREAD pthread)
 
 set(EXAMPLES coin_dist crave_functionality ex1_seed_dist ex2_constr_ref
                ex3_inh_soft_next ex4_constr_mng ex5_vec_constr ex6_inline_gen
-               ex7_randv_enum sudoku sudoku_free)
+               ex7_randv_enum ex8_make_expression sudoku sudoku_free)
 
 foreach (ex ${EXAMPLES})
   if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${ex}")
