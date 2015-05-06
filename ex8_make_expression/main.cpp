@@ -8,8 +8,8 @@ template<int N>
 struct item : public rand_obj {
 
   crave::expression sum() {
-    crave::expression result = crave::make_expression(arr[0]());
-    for (int i = 1; i < N; i++)
+    crave::expression result = crave::value_to_expression(0);
+    for (int i = 0; i < N; i++)
       result = crave::make_expression(result + arr[i]());
     return result;  
   }
