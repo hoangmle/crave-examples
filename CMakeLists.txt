@@ -8,7 +8,7 @@ set(EXAMPLES coin_dist crave_functionality ex1_seed_dist ex2_constr_ref
                ex7_randv_enum ex8_make_expression sudoku sudoku_free)
 
 if (CRAVE_ENABLE_EXPERIMENTAL)
-  LIST(APPEND EXAMPLES ex9_experimental)
+  LIST(APPEND EXAMPLES ex9_experimental barn_drawer)
 endif()
 
 foreach (ex ${EXAMPLES})
