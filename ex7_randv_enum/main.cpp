@@ -5,8 +5,6 @@ using crave::rand_obj;
 using crave::randv;
 using crave::if_then_else;
 using crave::if_then;
-using crave::dist;
-using crave::distribution;
 using crave::inside;
 using crave::range;
 
@@ -36,7 +34,7 @@ public:
     constraint(if_then(car() == AUDI, color() != GREEN));
     constraint(if_then(car() == BMW, color() != RED));
     constraint(if_then(car() == MERCEDES, color() != BLUE));
-    constraint(dist(power(), distribution<int>::simple_range(80, 400)));
+    constraint(80 <= power() && power() <= 400);
     constraint(if_then(car() == BMW, power() >= 200));
     int prices[] = { 20, 30, 40, 50, 60, 70, 80, 90, 100 };
     constraint(inside(price(), prices));
@@ -63,7 +61,7 @@ public:
     os << obj.power;
     os << " ";
     os << obj.price;
-     return os;
+    return os;
   }
 };
 

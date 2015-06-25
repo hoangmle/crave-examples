@@ -10,16 +10,9 @@ struct irqmp_regs : public crv_sequence_item {
   crv_constraint level_reg_cstr { "level_reg_cstr" };
   crv_constraint force_reg_cstr { "force_reg_cstr" }; 
 
-  crv_constraint dist_cstr { "dist_str" };
-
 	irqmp_regs(crv_object_name) { 
     level_reg_cstr = { level_reg() < (1 << 16), (level_reg() & 1) == 0 };
-    force_reg_cstr = { (force_reg() & 0xFFFF0001) == 0 };	
-    
-    dist_cstr = {
-      dist(level_reg(), distribution<unsigned>::simple_range(1, (1 << 16) - 1)),
-      dist(force_reg(), distribution<unsigned>::simple_range(1, (1 << 16) - 1))
-    };
+    force_reg_cstr = { (force_reg() & 0xFFFF0001) == 0 };
 	}
 };
  
@@ -48,7 +41,6 @@ int main (int argc , char *argv[]) {
   irqmp_covergroup cg("cg");  
   cg.lr.bind(regs.level_reg);
   cg.fr.bind(regs.force_reg);
-  regs.goal(cg);
   for (int i = 0; i < 50000; i++) {
     assert(regs.randomize());    
     cg.sample();
@@ -56,6 +48,7 @@ int main (int argc , char *argv[]) {
       std::cout << "#Iterations = " << (i + 1) << std::endl;
       break;
     }
+    if (i == 500) regs.goal(cg);
   }
   cg.report();
 }

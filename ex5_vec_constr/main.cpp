@@ -8,8 +8,6 @@ using crave::foreach;
 using crave::unique;
 using crave::if_then;
 using crave::if_then_else;
-using crave::dist;
-using crave::distribution;
 
 #define IF_THEN(a, b) !(a) || (b)
 #define IF_THEN_ELSE(a, b, c) (!(a) || (b)) && ((a) || (c))
@@ -17,7 +15,7 @@ using crave::distribution;
 class item : public rand_obj {
 public:
 	item(rand_obj* parent = 0) : rand_obj(parent), src_addr_vec(this), dest_addr_vec(this), data_vec(this), tmp(this), _i() {
-    constraint(dist(tmp(), distribution<uint>::simple_range(5, 10)));
+    constraint(5 <= tmp() && tmp() <= 10);
 
 		constraint(src_addr_vec().size() == tmp());
 		constraint(foreach(src_addr_vec(), src_addr_vec()[_i] < 0xFF));
