@@ -45,6 +45,7 @@ int sc_main (int argc, char** argv)
   crave::init("./crave.cfg");
   boost::timer timer;
   ALU4 c;
+  c.next();
   std::cout << "first: " << timer.elapsed() << "\n";
   for (int i=0; i<1000; ++i) {
     c.next();
