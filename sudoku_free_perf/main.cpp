@@ -42,24 +42,31 @@ public:
 	}
 };
 
-template <unsigned N>
+template <unsigned N, bool ToBeFailed>
 class sudoku_container : public rand_obj {
  public:
 	sudoku_container(rand_obj* parent = 0) : rand_obj(parent) {
-    for (unsigned i = 0; i < N; i++)
+    for (unsigned i = 0; i < N; i++) {
       list.push_back(new sudoku(this));
+      if (ToBeFailed)
+        constraint(x[i]() != x[i]());
+      else  
+        constraint(x[i]() == x[i]());
+    }
 	}
 	
  private:	
   std::vector<sudoku*> list;
+  randv<unsigned> x[N];
 };
 
 int main (int argc, char *argv[]) {
   boost::timer::auto_cpu_timer t;
   crave::init("crave.cfg");
-	sudoku_container<3> sc;
+	sudoku_container<9, true> sc;
+  sc.constraint.enable_multithreading();
 	for (int i = 0; i < 20; i++) {
-    assert(sc.next());
+    std::cout << (sc.next() ? "solved" : "failed") << std::endl;
 	}
 	return 0;
 }
