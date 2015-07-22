@@ -1,6 +1,6 @@
 #include <crave/ConstrainedRandom.hpp>
 #include <vector>
-#include <boost/timer/timer.hpp>
+#include <boost/timer.hpp>
 
 using crave::rand_obj;
 using crave::randv;
@@ -61,12 +61,13 @@ class sudoku_container : public rand_obj {
 };
 
 int main (int argc, char *argv[]) {
-  boost::timer::auto_cpu_timer t;
+  boost::timer timer;
   crave::init("crave.cfg");
 	sudoku_container<9, true> sc;
   sc.constraint.enable_multithreading();
 	for (int i = 0; i < 20; i++) {
     std::cout << (sc.next() ? "solved" : "failed") << std::endl;
 	}
+  std::cout << "complete: " << timer.elapsed() << std::endl;
 	return 0;
 }

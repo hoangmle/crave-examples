@@ -1,10 +1,13 @@
+set(Boost_NO_BOOST_CMAKE true)
+set(Boost_NO_SYSTEM_PATHS true)
+set(Boost_ADDITIONAL_VERSIONS "1.50.0")
 find_package ( Boost )
 
 include_directories( ${crave_SOURCE_DIR}/src ${metaSMT_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${GLOG_INCLUDE_DIR})
 
 set(EXAMPLES coin_dist crave_functionality ex1_seed_dist ex2_constr_ref
                ex3_inh_soft_next ex4_constr_mng ex5_vec_constr ex6_inline_gen
-               ex7_randv_enum ex8_make_expression sudoku sudoku_free)
+               ex7_randv_enum ex8_make_expression sudoku sudoku_free sudoku_free_perf)
 
 if (CRAVE_ENABLE_EXPERIMENTAL)
   LIST(APPEND EXAMPLES ex9_experimental barn_drawer)
@@ -32,8 +35,4 @@ if(SystemC_FOUND)
     endif()
   endif()  
 endif(SystemC_FOUND)
-
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/sudoku_free_perf")
-  add_subdirectory(sudoku_free_perf)  
-endif()
 
