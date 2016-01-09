@@ -36,7 +36,6 @@ struct irqmp_covergroup : public crv_covergroup {
 
 int main (int argc , char *argv[]) {
   crave::init("crave.cfg");
-
   irqmp_regs regs("regs");
   irqmp_covergroup cg("cg");  
   cg.lr.bind(regs.level_reg);

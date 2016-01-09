@@ -1,6 +1,4 @@
-find_package(SystemC QUIET)
 find_package(Threads REQUIRED)
-include_directories(${SystemC_INCLUDE_DIR} ${metaSMT_INCLUDE_DIR})
 
 add_executable(ALU4 ALU4.cpp)
 target_link_libraries(ALU4 crave ${SystemC_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} ${Boost_THREAD_LIBRARY} ${GLOG_LIBRARY})
