@@ -1,4 +1,4 @@
-set(EXAMPLES ex7_rand_enum ex9_cdg barn_drawer)
+set(EXAMPLES ex7_rand_enum ex9_cdg ex10_variable_prev barn_drawer)
 
 foreach (ex ${EXAMPLES})
   if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${ex}")
