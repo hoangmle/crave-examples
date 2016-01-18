@@ -1,5 +1,5 @@
 set(EXAMPLES ex1_seed_dist ex2_constr_ref ex4_constr_mng ex6_inline_gen ex7_rand_enum ex8_make_expression 
-    ex9_cdg ex10_variable_prev barn_drawer sudoku sudoku_free coin_dist)
+    ex9_cdg ex10_variable_prev ex11_randomize_with barn_drawer sudoku sudoku_free coin_dist)
 
 foreach (ex ${EXAMPLES})
   if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${ex}")
@@ -9,6 +9,9 @@ foreach (ex ${EXAMPLES})
 endforeach(ex)
 
 if(SystemC_FOUND)
+  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/sysc_dt")
+	  add_subdirectory(sysc_dt)
+  endif()
   if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/y86_err_injection")
 	  add_subdirectory(y86_err_injection)
   endif()
