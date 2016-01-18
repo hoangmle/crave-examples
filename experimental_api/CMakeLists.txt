@@ -1,4 +1,5 @@
-set(EXAMPLES ex7_rand_enum ex9_cdg ex10_variable_prev barn_drawer)
+set(EXAMPLES ex1_seed_dist ex2_constr_ref ex4_constr_mng ex6_inline_gen ex7_rand_enum ex8_make_expression 
+    ex9_cdg ex10_variable_prev barn_drawer sudoku sudoku_free coin_dist)
 
 foreach (ex ${EXAMPLES})
   if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${ex}")
@@ -13,6 +14,12 @@ if(SystemC_FOUND)
   endif()
   if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/y86_igen")
     add_subdirectory(y86_igen)
+  endif()
+  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ALU")
+    add_subdirectory(ALU)
+  endif()
+  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/random_stability")
+    add_subdirectory(random_stability)
   endif()
 endif(SystemC_FOUND)
 
