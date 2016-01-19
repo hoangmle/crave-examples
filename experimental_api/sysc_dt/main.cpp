@@ -11,9 +11,13 @@ struct sysc_cont : public crv_sequence_item {
   crv_variable<sc_uint<6>> y{"y"};
   crv_variable<sc_bv<7>> z{"z"};
 
-  crv_constraint constr{"constr", {x() == 15, y() > 0 && y() % 16 == 0, (z() & 0xF) == 0xE}};
+  sc_uint<5> t = 13;
 
-  sysc_cont(crv_object_name) {}
+  crv_constraint constr{"constr"};
+
+  sysc_cont(crv_object_name) {
+    constr = {x() == 15, y() > 0, y() % reference(t) == 0, y() != y.prev(), (z() & 0xF) == 0xE};
+  }
 };
 
 int main(int argc, char *argv[]) {
@@ -22,5 +26,9 @@ int main(int argc, char *argv[]) {
   for (int i = 0; i < 40; i++) {
     assert(sc.randomize());
     std::cout << sc.x << " " << sc.y << " " << sc.z << std::endl;
+    if (i == 20) {
+      std::cout << std::endl;
+      sc.t = 17;
+    }
   }
 }
