@@ -24,12 +24,24 @@ struct item : public crv_sequence_item {
 struct item_ext : public item {
   crv_constraint hard_c1 { "hard_c1" };
 
-	item_ext(crv_object_name name) : item(name) {
-		// item_ext inherits all constraints of item		
-//		hard_c(src_addr() % 4 == 3); // this constraint makes the soft constraint in item useless.
-//		hard_c(dest_addr() > dest_addr.prev()); 
-		hard_c1  = { src_addr() % 4 == 3, dest_addr() > dest_addr.prev() }; 
+	item_ext(crv_object_name name) : item(name), last_dest_addr() {
+		// item_ext inherits all constraints of item
+		hard_c1  = { 
+      src_addr() % 4 == 3, // this constraint makes the soft constraint in item useless.
+      dest_addr() > reference(last_dest_addr) 
+    }; 
 	} 
+
+  bool randomize() override {
+		// custom randomize() saves the generated value of dest_addr
+    if (crv_sequence_item::randomize()) {
+      last_dest_addr = dest_addr;
+      return true;
+    }
+    return false;
+  }
+
+  uint last_dest_addr;
 };
 
 int main (int argc , char *argv[]) {

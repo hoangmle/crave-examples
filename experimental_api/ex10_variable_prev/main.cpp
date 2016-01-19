@@ -3,19 +3,28 @@
 
 using namespace crave;
 
-struct increment : public crv_sequence_item {
+struct item : public crv_sequence_item {
   crv_variable<unsigned> x { "x" };
-  crv_constraint inc { "inc" };
-  increment(crv_object_name) {
-    inc = { x() == 2 * x.prev() + 1 };
+  crv_variable<unsigned> y { "y" };
+
+  crv_constraint constr { "constr" };
+
+  item(crv_object_name) {
+    constr = { 
+      x() == 2 * x.prev() + 1,
+      y() <= 100,
+      y() > y.prev(),
+      y() <= y.prev() + 2 
+    };
   } 
 };
 
 int main (int argc , char *argv[]) {
   crave::init("crave.cfg");
-  increment obj("obj");
+  item obj("obj");
   for (int i = 0; i < 40; i++) {
     assert(obj.randomize());
-    std::cout << obj.x << std::endl;
+    // x should reach a fixpoint, y should be increasing
+    std::cout << obj.x << " " << obj.y << std::endl;
   }
 }
