@@ -10,8 +10,7 @@ class mod1 : public mod {
   }
 };
 
-int sc_main (int argc, char** argv)
-{
+int sc_main(int argc, char** argv) {
   crave::init("crave.cfg");
   crave::set_global_seed(123456789);
   mod1 m("my_module");
@@ -19,5 +18,3 @@ int sc_main (int argc, char** argv)
   m.print();
   return 0;
 }
-
-

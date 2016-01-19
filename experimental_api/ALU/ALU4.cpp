@@ -22,46 +22,38 @@ using sc_dt::sc_uint;
  * valid assignments.
  */
 struct ALU4 : public crv_sequence_item {
-	//field ‘op’ has incomplete type
-	crv_variable< sc_bv<2> >  op ;
-	crv_variable< sc_uint<4> > a, b ;
+  // field ‘op’ has incomplete type
+  crv_variable<sc_bv<2> > op;
+  crv_variable<sc_uint<4> > a, b;
 
-	crv_constraint c_add { "add" };
-	crv_constraint c_sub { "sub" };
-	crv_constraint c_mul { "mul" };
-	crv_constraint c_div { "div" };
+  crv_constraint c_add{"add"};
+  crv_constraint c_sub{"sub"};
+  crv_constraint c_mul{"mul"};
+  crv_constraint c_div{"div"};
 
-  ALU4(crv_object_name)
-  {
-	  c_add ( (op() != (unsigned char)0x0) || ( (unsigned char)15 >= a() + b() ) );
-	  c_sub ( (op() != (unsigned char)0x1) || (((unsigned char)15 >= a() - b()) && (b() <= a()) ) );
-	  c_mul ( (op() != (unsigned char)0x2) || ( (unsigned char)15 >= a() * b() ) );
-	  c_div ( (op() != (unsigned char)0x3) || ( b() != (unsigned char)0        ) );
+  ALU4(crv_object_name) {
+    c_add((op() != (unsigned char)0x0) || ((unsigned char)15 >= a() + b()));
+    c_sub((op() != (unsigned char)0x1) || (((unsigned char)15 >= a() - b()) && (b() <= a())));
+    c_mul((op() != (unsigned char)0x2) || ((unsigned char)15 >= a() * b()));
+    c_div((op() != (unsigned char)0x3) || (b() != (unsigned char)0));
   }
 
-  friend std::ostream & operator<< (std::ostream & o, ALU4 const & alu) 
-  {
-    o << alu.op 
-      << ' ' << alu.a
-      << ' ' << alu.b
-      ;
+  friend std::ostream& operator<<(std::ostream& o, ALU4 const& alu) {
+    o << alu.op << ' ' << alu.a << ' ' << alu.b;
     return o;
   }
 };
 
-int sc_main (int argc, char** argv)
-{
+int sc_main(int argc, char** argv) {
   crave::init("./crave.cfg");
   boost::timer timer;
   ALU4 c("ALU");
   c.randomize();
   std::cout << "first: " << timer.elapsed() << "\n";
-  for (int i=0; i<1000; ++i) {
+  for (int i = 0; i < 1000; ++i) {
     c.randomize();
     std::cout << i << ": " << c << std::endl;
   }
   std::cout << "complete: " << timer.elapsed() << "\n";
   return 0;
 }
-
-
