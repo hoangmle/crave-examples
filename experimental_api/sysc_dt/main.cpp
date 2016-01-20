@@ -16,7 +16,8 @@ struct sysc_cont : public crv_sequence_item {
   crv_constraint constr{"constr"};
 
   sysc_cont(crv_object_name) {
-    constr = {x() == 15, y() > 0, y() % reference(t) == 0, y() != y.prev(), (z() & 0xF) == 0xE};
+    constr = {dist(x(), make_distribution(range<int>(5, 8))), y() > 0, y() % reference(t) == 0, y() != y.prev(),
+              (z() & 0xF) == 0xE};
   }
 };
 
@@ -31,4 +32,5 @@ int main(int argc, char *argv[]) {
       sc.t = 17;
     }
   }
+  return 0;
 }

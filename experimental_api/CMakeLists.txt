@@ -1,4 +1,4 @@
-set(EXAMPLES ex1_seed_dist ex2_constr_ref ex3_inh_soft_next ex4_constr_mng ex6_inline_gen ex7_rand_enum 
+set(EXAMPLES ex1_seed_dist ex2_constr_ref ex3_inh_soft_next ex4_constr_mng ex5_vec_constr ex6_inline_gen ex7_rand_enum 
     ex8_make_expression ex9_cdg ex10_variable_prev ex11_randomize_with barn_drawer sudoku sudoku_free coin_dist)
 
 foreach (ex ${EXAMPLES})

@@ -5,8 +5,8 @@ using crave::crv_sequence_item;
 using crave::crv_constraint;
 using crave::crv_variable;
 using crave::crv_object_name;
+using crave::make_distribution;
 
-using crave::distribution;
 using crave::dist;
 using crave::range;
 using crave::weighted_range;
@@ -14,9 +14,10 @@ using crave::weighted_range;
 class item : public crv_sequence_item {
  public:
   item(crv_object_name) {
-    c_src_addr_range(dist(src_addr(), distribution<uint>::create(range<uint>(0, 9))(range<uint>(90, 99))));
-    c_dest_addr_range(dist(dest_addr(), distribution<uint>::create(weighted_range<uint>(0, 9, 60))(
-                                            weighted_range<uint>(10, 19, 30))(weighted_range<uint>(100, 109, 10))));
+    c_src_addr_range = {dist(src_addr(), make_distribution(range<uint>(0, 9), range<uint>(90, 99)))};
+    c_dest_addr_range = {
+        dist(dest_addr(), make_distribution(weighted_range<uint>(0, 9, 60), weighted_range<uint>(10, 19, 30),
+                                            weighted_range<uint>(100, 109, 10)))};
   }
 
   friend ostream& operator<<(ostream& os, item& it) {

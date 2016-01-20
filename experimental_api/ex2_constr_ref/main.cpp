@@ -17,8 +17,8 @@ using crave::weighted_range;
 class item : public crv_sequence_item {
  public:
   item(crv_object_name) : src_addr(0) {
-    c_dest_aligned(dest_addr() % 4 == 0);
-    c_dest_bigger_src(dest_addr() >= reference(src_addr) + 3);
+    c_dest_aligned = {dest_addr() % 4 == 0};
+    c_dest_bigger_src = {dest_addr() >= reference(src_addr) + 3};
   }
 
   friend ostream& operator<<(ostream& os, item& it) {

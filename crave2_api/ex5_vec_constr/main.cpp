@@ -9,9 +9,6 @@ using crave::unique;
 using crave::if_then;
 using crave::if_then_else;
 
-#define IF_THEN(a, b) !(a) || (b)
-#define IF_THEN_ELSE(a, b, c) (!(a) || (b)) && ((a) || (c))
-
 class item : public rand_obj {
  public:
   item(rand_obj* parent = 0)
@@ -56,8 +53,6 @@ class item : public rand_obj {
 int main(int argc, char* argv[]) {
   crave::init("crave.cfg");
   item it;
-
-  it.constraint.printDotGraph(std::cout);
 
   for (int i = 0; i < 10; i++) {
     it.next();
