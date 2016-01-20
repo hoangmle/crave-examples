@@ -21,33 +21,30 @@ class sudoku : public crv_sequence_item {
     // constraint possible_values, only number from 1 to 9 are allowed
     short numbers[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     for (int i = 0; i < 9; i++)
-      for (int j = 0; j < 9; j++) c_possible_values &= { inside(field[i][j](), numbers) };
-      
+      for (int j = 0; j < 9; j++) c_possible_values &= {inside(field[i][j](), numbers)};
+
     // constraint rows, every number must appear exactly one time in one row
     for (int i = 0; i < 9; i++)
       for (int j = 0; j < 9; j++)
-        for (int k = j + 1; k < 9; k++) c_rows &= { field[i][j]() != field[i][k]() };
+        for (int k = j + 1; k < 9; k++) c_rows &= {field[i][j]() != field[i][k]()};
 
     // constraint columns, every number must appear exactly one time in one column
     for (int j = 0; j < 9; j++)
       for (int i = 0; i < 9; i++)
-        for (int k = i + 1; k < 9; k++) c_columns &= { field[i][j]() != field[k][j]() };
+        for (int k = i + 1; k < 9; k++) c_columns &= {field[i][j]() != field[k][j]()};
 
     // constraint regions, every number must appear exactly one time in one region
     for (int i = 0; i < 9; i++)
       for (int j = 0; j < 9; j++) {
-        c_regions &= {
-          field[i][j]() != field[(i + 1) % 3 + i - (i % 3)][j](),
-          field[i][j]() != field[(i + 2) % 3 + i - (i % 3)][j](),
-          field[i][j]() != field[i][(j + 1) % 3 + j - (j % 3)](),
-          field[i][j]() != field[(i + 1) % 3 + i - (i % 3)][(j + 1) % 3 + j - (j % 3)](),
-          field[i][j]() != field[(i + 2) % 3 + i - (i % 3)][(j + 1) % 3 + j - (j % 3)](),
-          field[i][j]() != field[i][(j + 2) % 3 + j - (j % 3)](),
-          field[i][j]() != field[(i + 1) % 3 + i - (i % 3)][(j + 2) % 3 + j - (j % 3)](),
-          field[i][j]() != field[(i + 2) % 3 + i - (i % 3)][(j + 2) % 3 + j - (j % 3)]()
-        };  
+        c_regions &= {field[i][j]() != field[(i + 1) % 3 + i - (i % 3)][j](),
+                      field[i][j]() != field[(i + 2) % 3 + i - (i % 3)][j](),
+                      field[i][j]() != field[i][(j + 1) % 3 + j - (j % 3)](),
+                      field[i][j]() != field[(i + 1) % 3 + i - (i % 3)][(j + 1) % 3 + j - (j % 3)](),
+                      field[i][j]() != field[(i + 2) % 3 + i - (i % 3)][(j + 1) % 3 + j - (j % 3)](),
+                      field[i][j]() != field[i][(j + 2) % 3 + j - (j % 3)](),
+                      field[i][j]() != field[(i + 1) % 3 + i - (i % 3)][(j + 2) % 3 + j - (j % 3)](),
+                      field[i][j]() != field[(i + 2) % 3 + i - (i % 3)][(j + 2) % 3 + j - (j % 3)]()};
       }
-
   }
 
   void print() {

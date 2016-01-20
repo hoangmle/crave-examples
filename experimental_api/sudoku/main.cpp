@@ -23,35 +23,33 @@ class sudoku : public crv_sequence_item {
     for (int i = 0; i < 9; i++)
       for (int j = 0; j < 9; j++)
         c_keep_given_sudoku &= {
-            crave::if_then(reference(given_sudoku[i][j]) != 0, result_sudoku[i][j]() == reference(given_sudoku[i][j])) };
+            crave::if_then(reference(given_sudoku[i][j]) != 0, result_sudoku[i][j]() == reference(given_sudoku[i][j]))};
 
     // constraint possible_values, only number from 1 to 9 are allowed
     for (int i = 0; i < 9; i++)
-      for (int j = 0; j < 9; j++) c_possible_values &= { result_sudoku[i][j]() >= 1, result_sudoku[i][j]() <= 9 };
+      for (int j = 0; j < 9; j++) c_possible_values &= {result_sudoku[i][j]() >= 1, result_sudoku[i][j]() <= 9};
 
     // constraint rows, every number must appear exactly one time in one row
     for (int i = 0; i < 9; i++)
       for (int j = 0; j < 9; j++)
-        for (int k = j + 1; k < 9; k++) c_rows &= { result_sudoku[i][j]() != result_sudoku[i][k]() };
+        for (int k = j + 1; k < 9; k++) c_rows &= {result_sudoku[i][j]() != result_sudoku[i][k]()};
 
     // constraint columns, every number must appear exactly one time in one column
     for (int j = 0; j < 9; j++)
       for (int i = 0; i < 9; i++)
-        for (int k = i + 1; k < 9; k++) c_columns &= { result_sudoku[i][j]() != result_sudoku[k][j]() };
+        for (int k = i + 1; k < 9; k++) c_columns &= {result_sudoku[i][j]() != result_sudoku[k][j]()};
 
     // constraint regions, every number must appear exactly one time in one region
     for (int i = 0; i < 9; i++)
       for (int j = 0; j < 9; j++) {
-        c_regions &= {
-          result_sudoku[i][j]() != result_sudoku[(i + 1) % 3 + i - (i % 3)][j](),
-          result_sudoku[i][j]() != result_sudoku[(i + 2) % 3 + i - (i % 3)][j](),
-          result_sudoku[i][j]() != result_sudoku[i][(j + 1) % 3 + j - (j % 3)](),
-          result_sudoku[i][j]() != result_sudoku[(i + 1) % 3 + i - (i % 3)][(j + 1) % 3 + j - (j % 3)](),
-          result_sudoku[i][j]() != result_sudoku[(i + 2) % 3 + i - (i % 3)][(j + 1) % 3 + j - (j % 3)](),
-          result_sudoku[i][j]() != result_sudoku[i][(j + 2) % 3 + j - (j % 3)](),
-          result_sudoku[i][j]() != result_sudoku[(i + 1) % 3 + i - (i % 3)][(j + 2) % 3 + j - (j % 3)](),
-          result_sudoku[i][j]() != result_sudoku[(i + 2) % 3 + i - (i % 3)][(j + 2) % 3 + j - (j % 3)]()
-        };  
+        c_regions &= {result_sudoku[i][j]() != result_sudoku[(i + 1) % 3 + i - (i % 3)][j](),
+                      result_sudoku[i][j]() != result_sudoku[(i + 2) % 3 + i - (i % 3)][j](),
+                      result_sudoku[i][j]() != result_sudoku[i][(j + 1) % 3 + j - (j % 3)](),
+                      result_sudoku[i][j]() != result_sudoku[(i + 1) % 3 + i - (i % 3)][(j + 1) % 3 + j - (j % 3)](),
+                      result_sudoku[i][j]() != result_sudoku[(i + 2) % 3 + i - (i % 3)][(j + 1) % 3 + j - (j % 3)](),
+                      result_sudoku[i][j]() != result_sudoku[i][(j + 2) % 3 + j - (j % 3)](),
+                      result_sudoku[i][j]() != result_sudoku[(i + 1) % 3 + i - (i % 3)][(j + 2) % 3 + j - (j % 3)](),
+                      result_sudoku[i][j]() != result_sudoku[(i + 2) % 3 + i - (i % 3)][(j + 2) % 3 + j - (j % 3)]()};
       }
   }
 

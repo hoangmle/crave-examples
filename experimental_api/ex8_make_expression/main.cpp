@@ -9,8 +9,8 @@ using crave::crv_object_name;
 template <int N>
 struct item : public crv_sequence_item {
   item(crv_object_name) {
-    arr_constr = { arr.sum() == 20 };
-    for (int i = 0; i < N; i++) arr_constr &= { 10 > arr[i]() };
+    arr_constr = {arr.sum() == 20};
+    for (int i = 0; i < N; i++) arr_constr &= {10 > arr[i]()};
   }
 
   crv_array<unsigned, N> arr{"arr"};

@@ -31,10 +31,10 @@ struct ALU4 : public crv_sequence_item {
   crv_constraint c_div{"div"};
 
   ALU4(crv_object_name) {
-    c_add = { (op() != (unsigned char)0x0) || ((unsigned char)15 >= a() + b()) };
-    c_sub = { (op() != (unsigned char)0x1) || (((unsigned char)15 >= a() - b()) && (b() <= a())) };
-    c_mul = { (op() != (unsigned char)0x2) || ((unsigned char)15 >= a() * b()) };
-    c_div = { (op() != (unsigned char)0x3) || (b() != (unsigned char)0) };
+    c_add = {(op() != (unsigned char)0x0) || ((unsigned char)15 >= a() + b())};
+    c_sub = {(op() != (unsigned char)0x1) || (((unsigned char)15 >= a() - b()) && (b() <= a()))};
+    c_mul = {(op() != (unsigned char)0x2) || ((unsigned char)15 >= a() * b())};
+    c_div = {(op() != (unsigned char)0x3) || (b() != (unsigned char)0)};
   }
 
   friend std::ostream& operator<<(std::ostream& o, ALU4 const& alu) {

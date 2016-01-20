@@ -27,11 +27,11 @@ struct ALU12 : public crv_sequence_item {
   crv_constraint c_div{"div"};
 
   ALU12(crv_object_name) {
-    c_dist = { dist(op(), distribution<short>::simple_range(0, 3)) };
-    c_add = { (op() != 0x0) || (4095 >= a() + b()) };
-    c_sub = { (op() != 0x1) || ((4095 >= a() - b()) && (b() <= a())) };
-    c_mul = { (op() != 0x2) || (4095 >= a() * b()) };
-    c_div = { (op() != 0x3) || (b() != 0) };
+    c_dist = {dist(op(), distribution<short>::simple_range(0, 3))};
+    c_add = {(op() != 0x0) || (4095 >= a() + b())};
+    c_sub = {(op() != 0x1) || ((4095 >= a() - b()) && (b() <= a()))};
+    c_mul = {(op() != 0x2) || (4095 >= a() * b())};
+    c_div = {(op() != 0x3) || (b() != 0)};
   }
 
   friend std::ostream& operator<<(std::ostream& o, ALU12 const& alu) {
