@@ -17,9 +17,7 @@ struct ALU12 : public rand_obj {
   randv<sc_uint<12> > a, b;
 
   ALU12(rand_obj* parent = 0) : rand_obj(parent), op(this), a(this), b(this) {
-    randv<short> tmp(NULL);
-    constraint(dist(tmp(), distribution<short>::simple_range(0, 3)));
-    constraint(tmp() == op());
+    constraint(dist(op(), distribution<short>::simple_range(0, 3)));
     constraint((op() != 0x0) || (4095 >= a() + b()));
     constraint((op() != 0x1) || ((4095 >= a() - b()) && (b() <= a())));
     constraint((op() != 0x2) || (4095 >= a() * b()));
