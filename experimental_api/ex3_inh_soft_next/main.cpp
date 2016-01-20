@@ -8,11 +8,11 @@ struct item : public crv_sequence_item {
   crv_variable<uint> dest_addr{"dest_addr"};
 
   crv_constraint hard_c{"hard_c"};
-  //  crv_soft_constraint soft_c { "soft_c" };
+  crv_soft_constraint soft_c{"soft_c"};
 
   item(crv_object_name) {
     hard_c = {src_addr() <= 20, dest_addr() <= 100};
-    //		soft_c = { src_addr() % 4 == 0 };
+    soft_c = {src_addr() % 4 == 0};
   }
 
   friend ostream& operator<<(ostream& os, item& it) {
