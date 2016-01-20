@@ -3,29 +3,18 @@
 
 using crave::crv_sequence_item;
 using crave::crv_constraint;
-using crave::crv_variable;
+using crave::crv_array;
 using crave::crv_object_name;
-
-using crave::rand_obj;
-using crave::randv;
-using crave::reference;
 
 template <int N>
 struct item : public crv_sequence_item {
-  crave::expression sum() {
-    crave::expression result = crave::value_to_expression(0);
-    for (int i = 0; i < N; i++) result = crave::make_expression(result + arr[i]());
-    return result;
-  }
-
   item(crv_object_name) {
-    for (int i = 0; i < N; i++) c_arr_el_lte_10(10 > arr[i]());
-    c_sum_eq_20(sum() == 20);
+    arr_constr = { arr.sum() == 20 };
+    for (int i = 0; i < N; i++) arr_constr(10 > arr[i]());
   }
 
-  crv_variable<unsigned> arr[N];
-  crv_constraint c_arr_el_lte_10{"arr_el_lte_10"};
-  crv_constraint c_sum_eq_20{"sum_eq_20"};
+  crv_array<unsigned, N> arr{"arr"};
+  crv_constraint arr_constr{"arr_constr"};
 };
 
 int main(int argc, char *argv[]) {
