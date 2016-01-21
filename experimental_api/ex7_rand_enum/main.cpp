@@ -10,19 +10,19 @@ CRAVE_EXPERIMENTAL_ENUM(color_enum, (RED)(GREEN)(BLUE));
 
 class my_crv_sequence_item : public crv_sequence_item {
  public:
-  CRV_VARIABLE(car_type_enum, car);
-  CRV_VARIABLE(color_enum, color);
-  CRV_VARIABLE(int, power);
-  CRV_VARIABLE(int, price);
+  crv_variable<car_type_enum> car;
+  crv_variable<color_enum> color;
+  crv_variable<int> power;
+  crv_variable<int> price;
 
-  CRV_CONSTRAINT(car_color, {if_then(car() == car_type_enum::AUDI, color() != GREEN),
-                             if_then(car() == car_type_enum::BMW, color() != RED),
-                             if_then(car() == car_type_enum::MERCEDES, color() != BLUE)});
-  CRV_CONSTRAINT(power_range, dist(power(), distribution<int>::simple_range(80, 400)));
-  CRV_CONSTRAINT(car_power, if_then(car() == car_type_enum::BMW, power() >= 200));
-  CRV_CONSTRAINT(price_range, inside(price(), std::set<int>{20, 30, 40, 50, 60, 70, 80, 90, 100}));
-  CRV_CONSTRAINT(car_price,
-                 {if_then(car() == car_type_enum::MERCEDES, price() >= 40), if_then(color() == RED, price() <= 40)});
+  crv_constraint car_color{ if_then(car() == car_type_enum::AUDI, color() != GREEN),
+                            if_then(car() == car_type_enum::BMW, color() != RED),
+                            if_then(car() == car_type_enum::MERCEDES, color() != BLUE) };
+  crv_constraint power_range{ dist(power(), distribution<int>::simple_range(80, 400)) };
+  crv_constraint car_power{ if_then(car() == car_type_enum::BMW, power() >= 200) };
+  crv_constraint price_range{ inside(price(), std::set<int>{ 20, 30, 40, 50, 60, 70, 80, 90, 100 }) };
+  crv_constraint car_price{ if_then(car() == car_type_enum::MERCEDES, price() >= 40),
+                            if_then(color() == RED, price() <= 40) };
 
   my_crv_sequence_item(crv_object_name) {}
 

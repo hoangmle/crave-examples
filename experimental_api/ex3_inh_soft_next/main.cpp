@@ -4,16 +4,13 @@
 using namespace crave;
 
 struct item : public crv_sequence_item {
-  crv_variable<uint> src_addr{"src_addr"};
-  crv_variable<uint> dest_addr{"dest_addr"};
+  crv_variable<uint> src_addr;
+  crv_variable<uint> dest_addr;
 
-  crv_constraint hard_c{"hard_c"};
-  crv_soft_constraint soft_c{"soft_c"};
+  crv_constraint hard_c{ src_addr() <= 20, dest_addr() <= 100 };
+  crv_soft_constraint soft_c{ src_addr() % 4 == 0 };
 
-  item(crv_object_name) {
-    hard_c = {src_addr() <= 20, dest_addr() <= 100};
-    soft_c = {src_addr() % 4 == 0};
-  }
+  item(crv_object_name) {}
 
   friend ostream& operator<<(ostream& os, item& it) {
     os << it.src_addr << " " << it.dest_addr;
@@ -22,13 +19,11 @@ struct item : public crv_sequence_item {
 };
 
 struct item_ext : public item {
-  crv_constraint hard_c1{"hard_c1"};
+  crv_constraint hard_c1{ src_addr() % 4 == 3,  // this constraint makes the soft constraint in item useless.
+                          dest_addr() > reference(last_dest_addr) };
 
-  item_ext(crv_object_name name) : item(name), last_dest_addr() {
-    // item_ext inherits all constraints of item
-    hard_c1 = {src_addr() % 4 == 3,  // this constraint makes the soft constraint in item useless.
-               dest_addr() > reference(last_dest_addr)};
-  }
+  // item_ext inherits all constraints of item
+  item_ext(crv_object_name name) : item(name), last_dest_addr() {}
 
   bool randomize() override {
     // custom randomize() saves the generated value of dest_addr

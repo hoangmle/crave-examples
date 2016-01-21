@@ -16,16 +16,16 @@ struct ALU16 : public crv_sequence_item {
   crv_variable<sc_bv<2> > op;
   crv_variable<sc_uint<16> > a, b;
 
-  crv_constraint c_add{"add"};
-  crv_constraint c_sub{"sub"};
-  crv_constraint c_mul{"mul"};
-  crv_constraint c_div{"div"};
+  crv_constraint c_add{ "add" };
+  crv_constraint c_sub{ "sub" };
+  crv_constraint c_mul{ "mul" };
+  crv_constraint c_div{ "div" };
 
   ALU16(crv_object_name) {
-    c_add = {(op() != 0x0) || (65535 >= a() + b())};
-    c_sub = {(op() != 0x1) || ((65535 >= a() - b()) && (b() <= a()))};
-    c_mul = {(op() != 0x2) || (65535 >= a() * b())};
-    c_div = {(op() != 0x3) || (b() != 0)};
+    c_add = {(op() != 0x0) || (65535 >= a() + b()) };
+    c_sub = {(op() != 0x1) || ((65535 >= a() - b()) && (b() <= a())) };
+    c_mul = {(op() != 0x2) || (65535 >= a() * b()) };
+    c_div = {(op() != 0x3) || (b() != 0) };
   }
 
   friend std::ostream& operator<<(std::ostream& o, ALU16 const& alu) {

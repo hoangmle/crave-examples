@@ -4,20 +4,20 @@
 using namespace crave;
 
 struct base_obj : public crv_sequence_item {
-  crv_variable<unsigned> x{"x"};
-  crv_variable<unsigned> y{"y"};
+  crv_variable<unsigned> x{ "x" };
+  crv_variable<unsigned> y{ "y" };
 
-  crv_constraint c1{"c1"};
-  crv_constraint c2{"c2"};
+  crv_constraint c1{ "c1" };
+  crv_constraint c2{ "c2" };
 
   base_obj(crv_object_name) {
-    c1 = {x() <= 10};
-    c2 = {10 < y() && y() <= 20};
+    c1 = { x() <= 10 };
+    c2 = { 10 < y() && y() <= 20 };
   }
 };
 
 struct derived_obj : public base_obj {
-  crv_variable<unsigned> z{"z"};
+  crv_variable<unsigned> z{ "z" };
 
   derived_obj(crv_object_name name) : base_obj(name) {}
 };

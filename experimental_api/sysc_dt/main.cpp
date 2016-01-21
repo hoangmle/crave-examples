@@ -7,17 +7,17 @@
 using namespace crave;
 
 struct sysc_cont : public crv_sequence_item {
-  crv_variable<sc_int<5>> x{"x"};
-  crv_variable<sc_uint<6>> y{"y"};
-  crv_variable<sc_bv<7>> z{"z"};
+  crv_variable<sc_int<5>> x{ "x" };
+  crv_variable<sc_uint<6>> y{ "y" };
+  crv_variable<sc_bv<7>> z{ "z" };
 
   sc_uint<5> t = 13;
 
-  crv_constraint constr{"constr"};
+  crv_constraint constr{ "constr" };
 
   sysc_cont(crv_object_name) {
-    constr = {dist(x(), make_distribution(range<int>(5, 8))), y() > 0, y() % reference(t) == 0, y() != y.prev(),
-              (z() & 0xF) == 0xE};
+    constr = { dist(x(), make_distribution(range<int>(5, 8))), y() > 0, y() % reference(t) == 0, y() != y.prev(),
+               (z() & 0xF) == 0xE };
   }
 };
 

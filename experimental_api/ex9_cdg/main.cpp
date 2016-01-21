@@ -4,24 +4,21 @@
 using namespace crave;
 
 struct irqmp_regs : public crv_sequence_item {
-  crv_variable<unsigned> level_reg{"level_reg"};
-  crv_variable<unsigned> force_reg{"force_reg"};
+  crv_variable<unsigned> level_reg;
+  crv_variable<unsigned> force_reg;
 
-  crv_constraint level_reg_cstr{"level_reg_cstr"};
-  crv_constraint force_reg_cstr{"force_reg_cstr"};
+  crv_constraint level_reg_cstr{ level_reg() < (1 << 16), (level_reg() & 1) == 0 };
+  crv_constraint force_reg_cstr{(force_reg() & 0xFFFF0001) == 0 };
 
-  irqmp_regs(crv_object_name) {
-    level_reg_cstr = {level_reg() < (1 << 16), (level_reg() & 1) == 0};
-    force_reg_cstr = {(force_reg() & 0xFFFF0001) == 0};
-  }
+  irqmp_regs(crv_object_name) {}
 };
 
 struct irqmp_covergroup : public crv_covergroup {
-  crv_variable<unsigned> lr{"lr"};
-  crv_variable<unsigned> fr{"fr"};
+  crv_variable<unsigned> lr;
+  crv_variable<unsigned> fr;
 
-  crv_coverpoint fwd_lvl_1{"fwd_lvl_1"};
-  crv_coverpoint fwd_lvl_0{"fwd_lvl_0"};
+  crv_coverpoint fwd_lvl_1{ "fwd_lvl_1" };
+  crv_coverpoint fwd_lvl_0{ "fwd_lvl_0" };
 
   expression forced_lvl_1() { return make_expression(fr() & lr()); }
   expression forced_lvl_0() { return make_expression(fr() & ~lr()); }

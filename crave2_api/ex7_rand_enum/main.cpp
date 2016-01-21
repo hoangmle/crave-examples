@@ -27,7 +27,7 @@ class my_rand_obj : public rand_obj {
     constraint(if_then(car() == MERCEDES, color() != BLUE));
     constraint(80 <= power() && power() <= 400);
     constraint(if_then(car() == BMW, power() >= 200));
-    int prices[] = {20, 30, 40, 50, 60, 70, 80, 90, 100};
+    int prices[] = { 20, 30, 40, 50, 60, 70, 80, 90, 100 };
     constraint(inside(price(), prices));
     constraint(if_then(car() == MERCEDES, price() >= 40));
     constraint(if_then(color() == RED, price() <= 40));
