@@ -1,6 +1,7 @@
 set(EXAMPLES coin_dist crave_functionality ex1_seed_dist ex2_constr_ref
                ex3_inh_soft_next ex4_constr_mng ex5_vec_constr ex6_inline_gen
-               ex7_rand_enum ex8_make_expression sudoku sudoku_free sudoku_free_perf)
+               ex7_rand_enum ex8_make_expression sudoku sudoku_free sudoku_free_perf
+               ahb_mem_burst)
 
 foreach (ex ${EXAMPLES})
   if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${ex}")
