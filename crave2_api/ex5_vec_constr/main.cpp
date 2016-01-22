@@ -3,7 +3,7 @@
 using crave::rand_obj;
 using crave::randv;
 using crave::rand_vec;
-using crave::placeholder;
+using crave::_i;
 using crave::foreach;
 using crave::unique;
 using crave::if_then;
@@ -11,8 +11,7 @@ using crave::if_then_else;
 
 class item : public rand_obj {
  public:
-  item(rand_obj* parent = 0)
-      : rand_obj(parent), src_addr_vec(this), dest_addr_vec(this), data_vec(this), tmp(this), _i() {
+  item(rand_obj* parent = 0) : rand_obj(parent), src_addr_vec(this), dest_addr_vec(this), data_vec(this), tmp(this) {
     constraint(5 <= tmp() && tmp() <= 10);
 
     constraint(src_addr_vec().size() == tmp());
@@ -47,7 +46,6 @@ class item : public rand_obj {
   rand_vec<uint> dest_addr_vec;
   rand_vec<uint> data_vec;
   randv<uint> tmp;
-  placeholder _i;
 };
 
 int main(int argc, char* argv[]) {

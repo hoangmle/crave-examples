@@ -10,7 +10,7 @@ using crave::crv_vector;
 using crave::rand_obj;
 using crave::randv;
 using crave::rand_vec;
-using crave::placeholder;
+using crave::_i;
 using crave::foreach;
 using crave::unique;
 using crave::if_then;
@@ -18,7 +18,7 @@ using crave::if_then_else;
 
 class item : public crv_sequence_item {
  public:
-  item(crv_object_name) : _i() {
+  item(crv_object_name) {
     c_tmp_range = { 5 <= tmp(), tmp() <= 10 };
 
     c_src_conditions = { src_addr_vec().size() == tmp(), foreach (src_addr_vec(), src_addr_vec()[_i] < 0xFF),
@@ -52,7 +52,6 @@ class item : public crv_sequence_item {
   crv_vector<uint> dest_addr_vec;
   crv_vector<uint> data_vec{ "data_vec" };
   crv_variable<unsigned> tmp;
-  placeholder _i;
 
   crv_constraint c_tmp_range{ "tmp_range" };
   crv_constraint c_src_conditions{ "src_conditions" };

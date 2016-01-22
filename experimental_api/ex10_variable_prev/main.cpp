@@ -7,7 +7,7 @@ struct item : public crv_sequence_item {
   crv_variable<unsigned> x;
   crv_variable<unsigned> y;
 
-  crv_constraint constr{ x() == 2 * x.prev() + 1, y() <= 100, y() > y.prev(), y() <= y.prev() + 2 };
+  crv_constraint constr{ x() == 2 * x(prev) + 1, y() <= 100, y() > y(prev), y() <= y(prev) + 2 };
 
   item(crv_object_name) {}
 };
