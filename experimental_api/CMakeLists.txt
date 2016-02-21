@@ -12,6 +12,7 @@ set(EXAMPLES
   ex11_randomize_with
   sudoku
   sudoku_free
+  ahb_mem_burst
 )
 
 foreach (ex ${EXAMPLES})
