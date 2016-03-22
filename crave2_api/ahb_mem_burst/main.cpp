@@ -3,17 +3,7 @@
 #include <boost/format.hpp>
 #include <iostream>
 
-using crave::rand_obj;
-using crave::randv;
-using crave::rand_vec;
-using crave::dist;
-using crave::distribution;
-using crave::inside;
-using crave::reference;
-using crave::placeholder;
-using crave::if_then;
-using crave::if_then_else;
-using crave::foreach;
+using namespace crave;
 
 enum kkind_e { SINGLE, INCR, WRAP4, INCR4, WRAP8, INCR8, WRAP16, INCR16 };
 CRAVE_ENUM(kkind_e, (SINGLE)(INCR)(WRAP4)(INCR4)(WRAP8)(INCR8)(WRAP16)(INCR16));
@@ -38,7 +28,6 @@ class ahb_burst : public rand_obj {
         num_transfers(this),
         nnum_bytes(this),
         address(this) {
-
     constraint("word_aligned", if_then(ssize() == WORD, address() % 4 == 0));
     constraint("halfword_aligned", if_then(ssize() == HALFWORD, address() % 2 == 0));
 
@@ -50,9 +39,7 @@ class ahb_burst : public rand_obj {
     constraint("8B", if_then(kkind() == WRAP8 || kkind() == INCR8, num_transfers() == 8));
     constraint("16B", if_then(kkind() == WRAP16 || kkind() == INCR16, num_transfers() == 16));
 
-    for (int i = 0; i < 3; i++) {
-      constraint(if_then(i == ssize(), nnum_bytes() == (num_transfers() << i)));
-    }
+    constraint(nnum_bytes() == (num_transfers() << ssize()));
   }
 
   void print() {
@@ -72,10 +59,9 @@ class mem_burst_16 : public rand_obj {
   randv<unsigned int> bursts_nnum_bytes_acc[16];
 
   mem_burst_16(rand_obj* parent = 0) : rand_obj(parent), legal_size(this) {
-    for (int i = 0; i < 16; i++) 
-      this->add_obj_child(&bursts[i]);
+    for (int i = 0; i < 16; i++) this->add_obj_child(&bursts[i]);
 
-    constraint("legal_size", dist(legal_size(), distribution<uint>::simple_range(1, 16)));
+    constraint("legal_size", 1 <= legal_size() && legal_size() <= 16);
 
     constraint(bursts[0].address() == 0);
     for (int i = 1; i < 16; i++) {
