@@ -15,10 +15,7 @@ set(EXAMPLES
 
 foreach (ex ${EXAMPLES})
   if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${ex}")
-    add_executable(${ex} ${ex}/main.cpp)
-    target_link_libraries(${ex} crave ${PTHREAD} ${GLOG_LIBRARY})
-    add_test("${ex}" ${ex})
-    set_tests_properties ("${ex}" PROPERTIES TIMEOUT ${EXAMPLES_TIMEOUT})
+    add_ex_test(${ex} ${ex}/main.cpp)
   endif()
 endforeach(ex)
 
