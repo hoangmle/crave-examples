@@ -67,7 +67,7 @@ class sudoku : public crv_sequence_item {
 int main(int argc, char *argv[]) {
   crave::init("crave.cfg");
   sudoku s("random_sudoku");
-  for (int i = 0; i < 20; i++) {
+  for (int i = 0; i < 10; i++) {
     assert(s.randomize());
     s.print();
   }
