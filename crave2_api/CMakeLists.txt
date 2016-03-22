@@ -9,7 +9,6 @@ set(EXAMPLES
   ex8_make_expression
   sudoku
   sudoku_free
-  sudoku_free_perf
   ahb_mem_burst
 )
 
@@ -18,6 +17,10 @@ foreach (ex ${EXAMPLES})
     add_ex_test(${ex} ${ex}/main.cpp)
   endif()
 endforeach(ex)
+
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/sudoku_free_perf")
+  add_subdirectory(sudoku_free_perf)
+endif()
 
 if(SystemC_FOUND)
   if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ALU")

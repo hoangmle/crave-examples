@@ -38,32 +38,30 @@ class sudoku : public rand_obj {
   }
 };
 
-template <unsigned N, bool ToBeFailed>
+template <bool SAT, unsigned N = 3>
 class sudoku_container : public rand_obj {
  public:
   sudoku_container(rand_obj* parent = 0) : rand_obj(parent) {
     for (unsigned i = 0; i < N; i++) {
       list.push_back(new sudoku(this));
-      if (ToBeFailed)
-        constraint(x[i]() != x[i]());
-      else
-        constraint(x[i]() == x[i]());
+      if (!SAT)
+        constraint(list[i]->field[0][0]() > 9);
     }
   }
 
  private:
   std::vector<sudoku*> list;
-  randv<unsigned> x[N];
 };
 
-int main(int argc, char* argv[]) {
+template <bool SAT, bool MT>
+void run_test() {
   boost::timer timer;
   crave::init("crave.cfg");
-  sudoku_container<9, true> sc;
-  sc.constraint.enable_multithreading();
-  for (int i = 0; i < 20; i++) {
-    std::cout << (sc.next() ? "solved" : "failed") << std::endl;
+  sudoku_container<SAT> sc;
+  if (MT) sc.constraint.enable_multithreading();
+  for (int i = 0; i < 10; i++) {
+    std::cout << "Iteration #" << (i + 1) << std::endl;
+    assert(sc.next() == SAT);
   }
   std::cout << "complete: " << timer.elapsed() << std::endl;
-  return 0;
 }
