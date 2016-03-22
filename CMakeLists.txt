@@ -1,4 +1,4 @@
-set(EXAMPLES_TIMEOUT 15)
+set(EXAMPLES_TIMEOUT 30)
 
 set(Boost_NO_BOOST_CMAKE true)
 set(Boost_NO_SYSTEM_PATHS true)
