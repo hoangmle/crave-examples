@@ -1,3 +1,5 @@
+set(EXAMPLES_TIMEOUT 15)
+
 set(Boost_NO_BOOST_CMAKE true)
 set(Boost_NO_SYSTEM_PATHS true)
 set(Boost_ADDITIONAL_VERSIONS "1.50.0")
