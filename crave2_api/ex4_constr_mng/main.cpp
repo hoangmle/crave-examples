@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
 
   it.disable_constraint("neg_data");
   for (int i = 0; i < 10; i++) {
-    it.next();
+    assert(it.next());
     std::cout << it << std::endl;
   }
 
@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
   it.enable_constraint("neg_data");
   it.disable_constraint("pos_data");
   for (int i = 0; i < 10; i++) {
-    it.next();
+    assert(it.next());
     std::cout << it << std::endl;
   }
 

@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
   item it;
 
   for (int i = 0; i < 10; i++) {
-    it.next();
+    assert(it.next());
     std::cout << it << std::endl;
   }
 

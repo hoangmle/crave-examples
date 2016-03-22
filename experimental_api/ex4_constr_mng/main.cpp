@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
 
   it.c_neg_data.deactivate();
   for (int i = 0; i < 10; i++) {
-    it.randomize();
+    assert(it.randomize());
     std::cout << it << std::endl;
   }
 
@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
   it.c_neg_data.activate();
   it.c_pos_data.deactivate();
   for (int i = 0; i < 10; i++) {
-    it.randomize();
+    assert(it.randomize());
     std::cout << it << std::endl;
   }
 

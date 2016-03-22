@@ -34,10 +34,10 @@ int sc_main(int argc, char** argv) {
   crave::init("crave.cfg");
   boost::timer timer;
   ALU12 c;
-  c.next();
+  assert(c.next());
   std::cout << "first: " << timer.elapsed() << "\n";
   for (int i = 0; i < 1000; ++i) {
-    c.next();
+    assert(c.next());
     std::cout << c << std::endl;
   }
   std::cout << "complete: " << timer.elapsed() << "\n";
