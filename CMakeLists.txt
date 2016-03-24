@@ -1,4 +1,6 @@
-set(EXAMPLES_TIMEOUT 30)
+if ( NOT CRAVE_EXAMPLES_TIMEOUT )
+  set(CRAVE_EXAMPLES_TIMEOUT 30)
+endif()
 
 set(Boost_NO_BOOST_CMAKE true)
 set(Boost_NO_SYSTEM_PATHS true)
@@ -17,7 +19,7 @@ function (add_ex_test ex cfile)
  add_executable(${ex} ${cfile})
  target_link_libraries(${ex} crave ${PTHREAD} ${GLOG_LIBRARY})
  add_test("${ex}" ${ex})
- set_tests_properties ("${ex}" PROPERTIES TIMEOUT ${EXAMPLES_TIMEOUT}) 
+ set_tests_properties ("${ex}" PROPERTIES TIMEOUT ${CRAVE_EXAMPLES_TIMEOUT}) 
 endfunction(add_ex_test)
 
 add_subdirectory(crave2_api)
