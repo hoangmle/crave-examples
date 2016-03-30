@@ -1,7 +1,9 @@
 #include "crave/ConstrainedRandom.hpp"
 
 #include <boost/format.hpp>
+#include <boost/shared_ptr.hpp>
 #include <iostream>
+#include <vector>
 
 using namespace crave;
 
@@ -54,27 +56,28 @@ class ahb_burst : public rand_obj {
 
 class mem_burst_16 : public rand_obj {
  public:
-  ahb_burst bursts[16];
+  std::vector<boost::shared_ptr<ahb_burst> > bursts;
   randv<unsigned int> legal_size;
   randv<unsigned int> bursts_nnum_bytes_acc[16];
 
   mem_burst_16(rand_obj* parent = 0) : rand_obj(parent), legal_size(this) {
-    for (int i = 0; i < 16; i++) this->add_obj_child(&bursts[i]);
+    for (int i = 0; i < 16; i++) 
+      bursts.push_back(boost::make_shared<ahb_burst>(this));
 
     constraint("legal_size", 1 <= legal_size() && legal_size() <= 16);
 
-    constraint(bursts[0].address() == 0);
+    constraint(bursts[0]->address() == 0);
     for (int i = 1; i < 16; i++) {
-      constraint(bursts[i].address() == bursts[i - 1].address() + bursts[i - 1].nnum_bytes());
+      constraint(bursts[i]->address() == bursts[i - 1]->address() + bursts[i - 1]->nnum_bytes());
     }
 
     for (int i = 0; i < 16; i++) {
-      constraint(if_then(bursts[i].kkind() == 1, bursts[i].incr_length() <= 16));
+      constraint(if_then(bursts[i]->kkind() == 1, bursts[i]->incr_length() <= 16));
     }
 
-    constraint(bursts_nnum_bytes_acc[0]() == bursts[0].nnum_bytes());
+    constraint(bursts_nnum_bytes_acc[0]() == bursts[0]->nnum_bytes());
     for (int i = 1; i < 16; i++) {
-      constraint(bursts_nnum_bytes_acc[i]() == bursts_nnum_bytes_acc[i - 1]() + bursts[i].nnum_bytes());
+      constraint(bursts_nnum_bytes_acc[i]() == bursts_nnum_bytes_acc[i - 1]() + bursts[i]->nnum_bytes());
     }
 
     for (int i = 0; i < 16; i++) {
@@ -102,7 +105,7 @@ int main(int argc, char* argv[]) {
     assert(ahb_seq.next());
     std::cout << boost::format("burst_size = %d") % ahb_seq.legal_size << std::endl;
     for (int j = 0; j < ahb_seq.legal_size; j++) {
-      ahb_seq.bursts[j].print();
+      ahb_seq.bursts[j]->print();
     }
     std::cout << std::endl << std::endl << std::endl << "********" << std::endl;
   }
