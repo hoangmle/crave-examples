@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
   crave::init("crave.cfg");
   sysc_cont sc("sc");
   for (int i = 0; i < 40; i++) {
-    assert(sc.randomize());
+    CHECK(sc.randomize());
     std::cout << sc.x << " " << sc.y << " " << sc.z << std::endl;
     if (i == 20) {
       std::cout << std::endl;

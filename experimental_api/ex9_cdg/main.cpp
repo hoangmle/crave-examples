@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
   cg.lr.bind(regs.level_reg);
   cg.fr.bind(regs.force_reg);
   for (int i = 0; i < 50000; i++) {
-    assert(regs.randomize());
+    CHECK(regs.randomize());
     cg.sample();
     if (cg.covered()) {
       std::cout << "#Iterations = " << (i + 1) << std::endl;

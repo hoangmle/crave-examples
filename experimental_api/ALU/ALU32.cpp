@@ -38,10 +38,10 @@ int sc_main(int argc, char** argv) {
   crave::init("crave.cfg");
   boost::timer timer;
   ALU32 c("ALU");
-  assert(c.randomize());
+  CHECK(c.randomize());
   std::cout << "first: " << timer.elapsed() << "\n";
   for (int i = 0; i < 1000; ++i) {
-    assert(c.randomize());
+    CHECK(c.randomize());
   }
   std::cout << "complete: " << timer.elapsed() << "\n";
   return 0;

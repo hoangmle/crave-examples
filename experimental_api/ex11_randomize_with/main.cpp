@@ -26,12 +26,12 @@ int main(int argc, char *argv[]) {
   crave::init("crave.cfg");
   derived_obj obj("obj");
   for (int i = 0; i < 10; i++) {
-    assert(obj.randomize());
+    CHECK(obj.randomize());
     std::cout << obj.x << " " << obj.y << " " << obj.z << std::endl;
   }
   std::cout << std::endl;
   for (int i = 0; i < 10; i++) {
-    assert(obj.randomize_with(obj.x() % 5 == 0, obj.y() % 5 == 0, obj.x() + obj.y() == obj.z()));
+    CHECK(obj.randomize_with(obj.x() % 5 == 0, obj.y() % 5 == 0, obj.x() + obj.y() == obj.z()));
     std::cout << obj.x << " " << obj.y << " " << obj.z << std::endl;
   }
 }

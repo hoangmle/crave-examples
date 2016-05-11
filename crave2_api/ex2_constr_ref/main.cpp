@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
   item it;
   for (uint i = 0; i < 20; i++) {
     it.src_addr = i;
-    assert(it.next());
+    CHECK(it.next());
     std::cout << it << std::endl;
   }
   return 0;

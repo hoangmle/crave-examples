@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
   crave::init("crave.cfg");
   my_crv_sequence_item obj("obj");
   for (int i = 0; i < 50; i++) {
-    assert(obj.randomize());
+    CHECK(obj.randomize());
     std::cout << obj << std::endl;
   }
   return 0;

@@ -37,13 +37,13 @@ class item : public rand_obj {
 int main(int argc, char* argv[]) {
   crave::init("crave.cfg");
   item it;
-  assert(!it.next());  // unsatisfiable constraints (data < 0) and (data > 0)
+  CHECK(!it.next());  // unsatisfiable constraints (data < 0) and (data > 0)
 
   std::cout << std::hex << std::showbase << std::internal;
 
   it.disable_constraint("neg_data");
   for (int i = 0; i < 10; i++) {
-    assert(it.next());
+    CHECK(it.next());
     std::cout << it << std::endl;
   }
 
@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
   it.enable_constraint("neg_data");
   it.disable_constraint("pos_data");
   for (int i = 0; i < 10; i++) {
-    assert(it.next());
+    CHECK(it.next());
     std::cout << it << std::endl;
   }
 

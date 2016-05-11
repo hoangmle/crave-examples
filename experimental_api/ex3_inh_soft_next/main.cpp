@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
   crave::init("crave.cfg");
   item it("it");
   for (int i = 0; i < 10; i++) {
-    assert(it.randomize());
+    CHECK(it.randomize());
     std::cout << it << std::endl;
   }
   std::cout << "***********************" << std::endl;

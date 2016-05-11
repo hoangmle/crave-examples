@@ -80,7 +80,7 @@ int main(int argc, char* argv[]) {
   ahb_burst ab("burst");
 
   for (int i = 0; i < 5; i++) {
-    assert(ab.randomize());
+    CHECK(ab.randomize());
     std::cout << boost::format("ab[%u]") % i << std::endl;
     ab.print();
   }
@@ -88,7 +88,7 @@ int main(int argc, char* argv[]) {
   std::cout << "-----------" << std::endl;
 
   for (int i = 0; i < 10; i++) {
-    assert(ahb_seq.randomize());
+    CHECK(ahb_seq.randomize());
     std::cout << boost::format("burst_size = %d") % ahb_seq.legal_size << std::endl;
     for (int j = 0; j < ahb_seq.legal_size; j++) {
       ahb_seq.bursts[j].print();

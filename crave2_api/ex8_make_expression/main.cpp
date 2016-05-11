@@ -24,12 +24,12 @@ int main(int argc, char* argv[]) {
   crave::init("crave.cfg");
 
   item<5> it;
-  assert(it.next());
+  CHECK(it.next());
   for (int i = 0; i < 5; i++) std::cout << it.arr[i] << " ";
   std::cout << std::endl;
 
   item<15> it1;
-  assert(it1.next());
+  CHECK(it1.next());
   for (int i = 0; i < 15; i++) std::cout << it1.arr[i] << " ";
   std::cout << std::endl;
 

@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
   item it("single_packet");
   for (uint i = 0; i < 20; i++) {
     it.src_addr = i;
-    assert(it.randomize());
+    CHECK(it.randomize());
     std::cout << it << std::endl;
   }
   return 0;

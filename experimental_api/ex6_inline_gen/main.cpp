@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
   crv_variable<int> x;
   crv_variable<int> y;
 
-  assert( crave::solve(x() >= 0, y() >= 0, x() + y() == 4, x() * y() == 4) );
+  CHECK( crave::solve(x() >= 0, y() >= 0, x() + y() == 4, x() * y() == 4) );
 
   std::cout << x << " " << y << std::endl;
 

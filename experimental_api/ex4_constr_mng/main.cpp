@@ -39,13 +39,13 @@ class item : public crv_sequence_item {
 int main(int argc, char* argv[]) {
   crave::init("crave.cfg");
   item it("single_packet");
-  assert(!it.randomize());  // unsatisfiable constraints (data < 0) and (data > 0)
+  CHECK(!it.randomize());  // unsatisfiable constraints (data < 0) and (data > 0)
 
   std::cout << std::hex << std::showbase << std::internal;
 
   it.c_neg_data.deactivate();
   for (int i = 0; i < 10; i++) {
-    assert(it.randomize());
+    CHECK(it.randomize());
     std::cout << it << std::endl;
   }
 
@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
   it.c_neg_data.activate();
   it.c_pos_data.deactivate();
   for (int i = 0; i < 10; i++) {
-    assert(it.randomize());
+    CHECK(it.randomize());
     std::cout << it << std::endl;
   }
 

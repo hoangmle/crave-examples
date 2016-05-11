@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
   item it;
 
   for (int i = 0; i < 20; i++) {
-    assert(it.next());
+    CHECK(it.next());
     std::cout << it << std::endl;
   }
 

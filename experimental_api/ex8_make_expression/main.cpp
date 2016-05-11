@@ -20,12 +20,12 @@ int main(int argc, char *argv[]) {
   crave::init("crave.cfg");
 
   item<5> it("5_items");
-  assert(it.randomize());
+  CHECK(it.randomize());
   for (int i = 0; i < 5; i++) std::cout << it.arr[i] << " ";
   std::cout << std::endl;
 
   item<15> it1("15_items");
-  assert(it1.randomize());
+  CHECK(it1.randomize());
   for (int i = 0; i < 15; i++) std::cout << it1.arr[i] << " ";
   std::cout << std::endl;
 

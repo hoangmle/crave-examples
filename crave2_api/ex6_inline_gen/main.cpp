@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
   Generator gen;
   gen(x() >= 0 && y() >= 0)(x() + y() == 4)(x() * y() == 4);
 
-  assert(gen.next());
+  CHECK(gen.next());
   std::cout << x << " " << y << std::endl;
 
   return 0;

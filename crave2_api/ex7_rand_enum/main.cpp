@@ -76,7 +76,7 @@ int main(int argc, char* argv[]) {
   crave::init("crave.cfg");
   my_rand_obj obj;
   for (int i = 0; i < 50; i++) {
-    assert(obj.next());
+    CHECK(obj.next());
     std::cout << obj << std::endl;
   }
   return 0;

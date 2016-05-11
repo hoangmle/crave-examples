@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
   crave::init("crave.cfg");
   sudoku s("random_sudoku");
   for (int i = 0; i < 10; i++) {
-    assert(s.randomize());
+    CHECK(s.randomize());
     s.print();
   }
   return 0;
