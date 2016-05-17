@@ -6,7 +6,7 @@ using namespace crave;
 CRAVE_BETTER_ENUM(car_type_enum, AUDI = 1, BMW = 2, MERCEDES = 3, VW = -1);
 
 enum color_enum { RED, GREEN, BLUE };
-CRAVE_EXPERIMENTAL_ENUM(color_enum, (RED)(GREEN)(BLUE));
+CRAVE_EXPERIMENTAL_ENUM(color_enum, RED, GREEN, BLUE);
 
 class my_crv_sequence_item : public crv_sequence_item {
  public:
