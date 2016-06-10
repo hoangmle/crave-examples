@@ -61,7 +61,7 @@ void run_test() {
   if (MT) sc.constraint.enable_multithreading();
   for (int i = 0; i < 10; i++) {
     std::cout << "Iteration #" << (i + 1) << std::endl;
-    assert(sc.next() == SAT);
+    CHECK(sc.next() == SAT);
   }
   std::cout << "complete: " << timer.elapsed() << std::endl;
 }
