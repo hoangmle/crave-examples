@@ -1,5 +1,6 @@
 #include <crave/ConstrainedRandom.hpp>
 #include <vector>
+#include <cassert>
 #include <boost/timer.hpp>
 
 using crave::rand_obj;
