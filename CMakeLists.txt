@@ -2,15 +2,11 @@ if ( NOT CRAVE_EXAMPLES_TIMEOUT )
   set(CRAVE_EXAMPLES_TIMEOUT 120)
 endif()
 
-include_directories( ${crave_SOURCE_DIR}/src ${metaSMT_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${GLOG_INCLUDE_DIR})
-
-if(SystemC_FOUND)
-  include_directories(${SystemC_INCLUDE_DIR})
-endif(SystemC_FOUND)
+include_directories(${crave_SOURCE_DIR}/src)
 
 function (add_ex_test ex cfile)
  add_executable(${ex} ${cfile})
- target_link_libraries(${ex} crave ${CMAKE_THREAD_LIBS_INIT} ${GLOG_LIBRARY})
+ target_link_libraries(${ex} ${PROJECT_NAME} ${ALL_EXTERNAL_LIBS})
  add_test("${ex}" ${ex})
  set_tests_properties ("${ex}" PROPERTIES TIMEOUT ${CRAVE_EXAMPLES_TIMEOUT}) 
 endfunction(add_ex_test)
