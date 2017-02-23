@@ -1,6 +1,10 @@
 #include <crave/ConstrainedRandom.hpp>
 #include <crave/experimental/Experimental.hpp>
 
+#include <iostream>
+
+using std::ostream;
+
 using crave::crv_sequence_item;
 using crave::crv_constraint;
 using crave::crv_variable;

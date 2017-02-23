@@ -1,5 +1,8 @@
 #include <crave/ConstrainedRandom.hpp>
-#include <iomanip>
+
+#include <iostream>
+
+using std::ostream;
 
 using crave::rand_obj;
 using crave::randv;

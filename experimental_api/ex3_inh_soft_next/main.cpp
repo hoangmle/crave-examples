@@ -1,6 +1,10 @@
 #include <crave/ConstrainedRandom.hpp>
 #include <crave/experimental/Experimental.hpp>
 
+#include <iostream>
+
+using std::ostream;
+
 using namespace crave;
 
 struct item : public crv_sequence_item {

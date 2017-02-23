@@ -1,6 +1,10 @@
 #include <crave/ConstrainedRandom.hpp>
 #include <crave/experimental/Experimental.hpp>
 
+#include <iostream>
+
+using std::ostream;
+
 using namespace crave;
 
 CRAVE_BETTER_ENUM(car_type_enum, AUDI = 1, BMW = 2, MERCEDES = 3, VW = -1);
