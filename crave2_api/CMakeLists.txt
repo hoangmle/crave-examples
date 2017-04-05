@@ -18,9 +18,9 @@ foreach (ex ${EXAMPLES})
   endif()
 endforeach(ex)
 
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/sudoku_free_perf")
-  add_subdirectory(sudoku_free_perf)
-endif()
+#if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/sudoku_free_perf")
+#  add_subdirectory(sudoku_free_perf)
+#endif()
 
 if(SystemC_FOUND)
   if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ALU")
