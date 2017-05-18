@@ -25,8 +25,8 @@ struct irqmp_covergroup : public crv_covergroup {
 
   irqmp_covergroup(crv_object_name) {
     for (int k = 1; k < 16; k++) {
-      fwd_lvl_1.bins((((forced_lvl_1() >> k) & 1) == 1) && (forced_lvl_1() < (2 << k)));
-      fwd_lvl_0.bins((((forced_lvl_0() >> k) & 1) == 1) && (forced_lvl_0() < (2 << k)) && (forced_lvl_1() == 0));
+      fwd_lvl_1.add_simple_bins((((forced_lvl_1() >> k) & 1) == 1) && (forced_lvl_1() < (2 << k)));
+      fwd_lvl_0.add_simple_bins((((forced_lvl_0() >> k) & 1) == 1) && (forced_lvl_0() < (2 << k)) && (forced_lvl_1() == 0));
     }
   }
 };
