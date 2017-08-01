@@ -17,7 +17,7 @@ struct item : public rand_obj {
     constraint(sum() == 20);
   }
 
-  randv<uint> arr[N];
+  randv<unsigned> arr[N];
 };
 
 int main(int argc, char* argv[]) {

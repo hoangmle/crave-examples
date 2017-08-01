@@ -13,9 +13,9 @@ using crave::weighted_range;
 class item : public rand_obj {
  public:
   item(rand_obj* parent = 0) : rand_obj(parent), src_addr(this), dest_addr(this) {
-    constraint(dist(src_addr(), distribution<uint>::create(range<uint>(0, 9))(range<uint>(90, 99))));
-    constraint(dist(dest_addr(), distribution<uint>::create(weighted_range<uint>(0, 9, 60))(
-                                     weighted_range<uint>(10, 19, 30))(weighted_range<uint>(100, 109, 10))));
+    constraint(dist(src_addr(), distribution<unsigned>::create(range<unsigned>(0, 9))(range<unsigned>(90, 99))));
+    constraint(dist(dest_addr(), distribution<unsigned>::create(weighted_range<unsigned>(0, 9, 60))(
+                                     weighted_range<unsigned>(10, 19, 30))(weighted_range<unsigned>(100, 109, 10))));
   }
 
   friend ostream& operator<<(ostream& os, item& it) {
@@ -23,8 +23,8 @@ class item : public rand_obj {
     return os;
   }
 
-  randv<uint> src_addr;
-  randv<uint> dest_addr;
+  randv<unsigned> src_addr;
+  randv<unsigned> dest_addr;
 };
 
 int main(int argc, char* argv[]) {

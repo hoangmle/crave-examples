@@ -21,8 +21,8 @@ class item : public rand_obj {
     return os;
   }
 
-  randv<uint> src_addr;
-  randv<uint> dest_addr;
+  randv<unsigned> src_addr;
+  randv<unsigned> dest_addr;
 };
 
 class item_ext : public item {
@@ -42,7 +42,7 @@ class item_ext : public item {
     return false;
   }
 
-  uint last_dest_addr;
+  unsigned last_dest_addr;
 };
 
 int main(int argc, char* argv[]) {

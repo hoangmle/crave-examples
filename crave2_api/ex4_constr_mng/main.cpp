@@ -15,7 +15,7 @@ class item : public rand_obj {
  public:
   item(rand_obj* parent = 0)
       : rand_obj(parent), src_addr(this), dest_addr(this), data(this), x(this), y(this), z(this) {
-    constraint(dist(src_addr(), distribution<uint>::simple_range(0, 0xFE)));
+    constraint(dist(src_addr(), distribution<unsigned>::simple_range(0, 0xFE)));
     constraint(dest_addr() <= src_addr());
     constraint("neg_data", -16 < data() && data() < 0);
     constraint("pos_data", 16 > data() && data() > 0);
@@ -30,8 +30,8 @@ class item : public rand_obj {
     return os;
   }
 
-  randv<uint> src_addr;
-  randv<uint> dest_addr;
+  randv<unsigned> src_addr;
+  randv<unsigned> dest_addr;
   randv<short> data;
   randv<int> x;
   randv<short> y, z;

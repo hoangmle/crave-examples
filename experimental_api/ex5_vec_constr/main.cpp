@@ -41,20 +41,20 @@ class item : public crv_sequence_item {
 
   friend ostream& operator<<(ostream& os, item& it) {
     os << "src_addr_vec = ";
-    for (uint i = 0; i < it.src_addr_vec.size(); i++) os << it.src_addr_vec[i] << " ";
+    for (unsigned i = 0; i < it.src_addr_vec.size(); i++) os << it.src_addr_vec[i] << " ";
     os << std::endl;
     os << "dest_addr_vec = ";
-    for (uint i = 0; i < it.dest_addr_vec.size(); i++) os << it.dest_addr_vec[i] << " ";
+    for (unsigned i = 0; i < it.dest_addr_vec.size(); i++) os << it.dest_addr_vec[i] << " ";
     os << std::endl;
     os << it.data_vec.name() << " = ";
-    for (uint i = 0; i < it.data_vec.size(); i++) os << it.data_vec[i] << " ";
+    for (unsigned i = 0; i < it.data_vec.size(); i++) os << it.data_vec[i] << " ";
     os << std::endl;
     return os;
   }
 
-  crv_vector<uint> src_addr_vec;
-  crv_vector<uint> dest_addr_vec;
-  crv_vector<uint> data_vec{ "data_vec" };
+  crv_vector<unsigned> src_addr_vec;
+  crv_vector<unsigned> dest_addr_vec;
+  crv_vector<unsigned> data_vec{ "data_vec" };
   crv_variable<unsigned> tmp;
 
   crv_constraint c_tmp_range{ "tmp_range" };

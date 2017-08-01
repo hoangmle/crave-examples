@@ -24,7 +24,7 @@ class sudoku : public rand_obj {
     // constraint rows, every number must appear exactly one time in one row
     for (int i = 0; i < 9; i++)
       for (int j = 0; j < 9; j++)
-        for (uint k = j + 1; k < 9; k++) constraint(result_sudoku[i][j]() != result_sudoku[i][k]());
+        for (unsigned k = j + 1; k < 9; k++) constraint(result_sudoku[i][j]() != result_sudoku[i][k]());
 
     // constraint columns, every number must appear exactly one time in one column
     for (int j = 0; j < 9; j++)

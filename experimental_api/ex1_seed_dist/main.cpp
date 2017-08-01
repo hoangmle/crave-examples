@@ -18,10 +18,10 @@ using crave::weighted_range;
 class item : public crv_sequence_item {
  public:
   item(crv_object_name) {
-    c_src_addr_range = { dist(src_addr(), make_distribution(range<uint>(0, 9), range<uint>(90, 99))) };
+    c_src_addr_range = { dist(src_addr(), make_distribution(range<unsigned>(0, 9), range<unsigned>(90, 99))) };
     c_dest_addr_range = { dist(dest_addr(),
-                               make_distribution(weighted_range<uint>(0, 9, 60), weighted_range<uint>(10, 19, 30),
-                                                 weighted_range<uint>(100, 109, 10))) };
+                               make_distribution(weighted_range<unsigned>(0, 9, 60), weighted_range<unsigned>(10, 19, 30),
+                                                 weighted_range<unsigned>(100, 109, 10))) };
   }
 
   friend ostream& operator<<(ostream& os, item& it) {

@@ -23,7 +23,7 @@ class item : public crv_sequence_item {
   crv_variable<int> x;
   crv_variable<short> y, z;
 
-  crv_constraint c_addr_constraints{ dist(src_addr(), distribution<uint>::simple_range(0, 0xFE)),
+  crv_constraint c_addr_constraints{ dist(src_addr(), distribution<unsigned>::simple_range(0, 0xFE)),
                                      dest_addr() <= src_addr() };
   crv_constraint c_neg_data{ -16 < data(), data() < 0 };
   crv_constraint c_pos_data{ 16 > data(), data() > 0 };

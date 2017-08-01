@@ -8,8 +8,8 @@ using std::ostream;
 using namespace crave;
 
 struct item : public crv_sequence_item {
-  crv_variable<uint> src_addr;
-  crv_variable<uint> dest_addr;
+  crv_variable<unsigned> src_addr;
+  crv_variable<unsigned> dest_addr;
 
   crv_constraint hard_c{ src_addr() <= 20, dest_addr() <= 100 };
   crv_soft_constraint soft_c{ src_addr() % 4 == 0 };
@@ -38,7 +38,7 @@ struct item_ext : public item {
     return false;
   }
 
-  uint last_dest_addr;
+  unsigned last_dest_addr;
 };
 
 int main(int argc, char* argv[]) {
