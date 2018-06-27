@@ -10,6 +10,7 @@ set(EXAMPLES
   ex9_cdg
   ex10_variable_prev
   ex11_randomize_with
+  ex12_bigint
   sudoku
   sudoku_free
   ahb_mem_burst
